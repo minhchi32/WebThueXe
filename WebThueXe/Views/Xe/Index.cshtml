@@ -1,50 +1,54 @@
-﻿
+﻿@model IEnumerable<WebThueXe.Models.Xe>
+
 @{
     ViewBag.Title = "Tất cả loại xe";
     Layout = "~/Views/Shared/_LayoutTimKiem.cshtml";
 }
 
-
 <h5>Tất cả loại xe</h5>
 <div class="container">
     <div class="row">
-        <div class="col-md-12" style="border: 1px solid black" onclick="location.href='@Url.Action("ChiTietXe", "Xe")'">
-            <br />
-            <div class="container">
-                <div class="row">
-                    <img class="float-left col-md-4 col-sm-12"
-                         src="~/Content/images/car1.jpg"
-                         alt="" />
-                    <div class="clearfix"></div>
-                    <div class="col-md-8">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5>ten xe</h5>
-                                    <hr />
-                                    <h6>gia thue</h6>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>bien so xe</p>
-                                    <p>tinh trang xe</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>loai xe</p>
-                                    <p>hieu xe</p>
-                                </div>
-                                <div class="col-md-12">
-                                    <p>mo ta xe</p>
+        @foreach (var item in Model)
+        {
+            <div class="col-md-12" style="border: 1px solid black" onclick="location.href='@Url.Action("ChiTietXe", "Xe")'">
+                <br />
+                <div class="container">
+                    <div class="row">
+                        <img class="float-left col-md-4 col-sm-12"
+                             src="@Url.Content(item.hinh)"
+                             alt="" />
+                        <div class="clearfix"></div>
+                        <div class="col-md-8">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5>@Html.DisplayFor(model => item.tenXe)</h5>
+                                        <hr />
+                                        <h6>@Html.DisplayFor(model => item.giaThueXe)</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Html.DisplayFor(model => item.bienSo)</p>
+                                        <p>@Html.DisplayFor(model => item.TinhTrangXe.tenTinhTrangXe)</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Html.DisplayFor(model => item.LoaiXe.tenLoaiXe)</p>
+                                        <p>@Html.DisplayFor(model => item.HieuXe.tenHieuXe)</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p>@Html.DisplayFor(model => item.moTaXe)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <br />
-        </div>
-        <div class="col-md-12">
-            <br />
-        </div>
+                <br />
 
-    </div>
+            </div>
+            <div class="col-md-12">
+                <br />
+            </div>
+
+        }
+        </div>
 </div>
