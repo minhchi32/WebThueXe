@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "_LayoutGiamDoc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Thống kê doanh thu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Thống kê danh sách hợp đồng thuê xe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Thống kê xe</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+            <menu class="col-md-10">
+                @RenderBody()
+            </menu>
+        </div>
+    </div>
+</main>
+

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "_LayoutAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Quản lý người dùng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Quản lý phân quyền</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+            <menu class="col-md-10">
+                @RenderBody()
+            </menu>
+        </div>
+    </div>
+</main>
+

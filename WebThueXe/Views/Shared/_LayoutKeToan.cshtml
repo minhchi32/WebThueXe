@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "_LayoutKeToan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Quản lý xe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Quản lý bảng giá xe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Quản lý khách hàng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Quản lý hợp đồng thuê xe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Quản lý sổ xe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Danh sách đơn đặt xe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Loại xe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Hiệu xe</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+            <menu class="col-md-10">
+                @RenderBody()
+            </menu>
+        </div>
+    </div>
+</main>
+

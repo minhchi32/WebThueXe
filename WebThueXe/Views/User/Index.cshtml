@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+}
+
+<section class="container-fluid" style="height:100%">
+    <section class="row justify-content-center">
+        <section class="col-12 col-sm-8 col-md-4 form-container">
+            <h2>Đăng nhập</h2>
+            <form>
+                <div class="form-group">
+                    <label>Tài khoản:</label>
+                    <input type="text" class="form-control" id="username">
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu:</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                    </label>
+                </div>
+                <p>Chưa có tài khoản?<a href="@Url.Action("Register", "User")">Đăng ký</a></p>
+                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "TrangChu")'">Đăng nhập</button>
+            </form>
+        </section>
+    </section>
+</section>

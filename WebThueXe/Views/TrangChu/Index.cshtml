@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselIndicators" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Content/images/backgroundCar1.jpg" class="d-block w-100" style="height:500px" alt="..." />
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/images/backgroundCar2.jpg" class="d-block w-100" style="height:500px" alt="..." />
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/images/backgroundCar3.jpg" class="d-block w-100" style="height:500px" alt="..." />
+            </div>
+            <div class="carousel-item">
+                <img src="~/Content/images/backgroundCar4.jpg" class="d-block w-100" style="height:500px" alt="..." />
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselIndicators" role="button"
+           data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicators" role="button"
+           data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="container">
+        <h3 class="text-center custom_underline">Dịch vụ</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="height: 450px;">
+                    <img src="~/Content/images/backgroundCar4.jpg" alt="" height="250" />
+                    <div class="card-body text-center">
+                        <h4>Thuê xe theo chuyến</h4>
+                        <p class="card-text">
+                            Dịch vụ cho thuê xe theo chuyến phù hợp với khách hàng cần đi
+                            sân bay hoặc cần đi công việc di chuyển trong nội thành
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="height: 450px;">
+                    <img src="~/Content/images/backgroundCar2.jpg" alt="" height="250" />
+                    <div class="card-body text-center">
+                        <h4>Thuê xe theo ngày</h4>
+                        <p class="card-text">
+                            Quý khách có thể đặt xe theo ngày bằng cách đặt online trên website của ShockViet hoặc liên hệ với tổng đài đặt xe ở số điện thoại 18000028
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="height: 450px;">
+                    <img src="~/Content/images/backgroundCar1.jpg" alt="" height="250" />
+                    <div class="card-body text-center">
+                        <h4>Thuê xe theo tháng</h4>
+                        <p class="card-text">
+                            Dịch vụ thuê xe theo tháng phù hợp với khách hàng là công ty. Hãy liên hệ ngay với ShockViet để được tư vấn và nhận nhiều ưu đãi về giá
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="text-center custom_underline">Loại xe</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm" style="height: 250px;">
+                    <div class="card-body text-center">
+                        <img class="cat-img" src="~/Content/images/4.png" alt="">
+                        <h4>Xe 4 chỗ</h4>
+                        <p class="card-text">
+                            Toyota Altis, Honda Civic
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm" style="height: 250px;">
+                    <div class="card-body text-center">
+                        <img class="cat-img" src="~/Content/images/7.png" alt="">
+                        <h4>Xe 7 chỗ</h4>
+                        <p class="card-text">
+                            Toyota Innova
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm" style="height: 250px;">
+                    <div class="card-body text-center">
+                        <img class="cat-img" src="~/Content/images/15.png" alt="">
+                        <h4>Xe 16 chỗ</h4>
+                        <p class="card-text">
+                            Ford Transit
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4 shadow-sm" style="height: 250px;">
+                    <div class="card-body text-center">
+                        <img class="cat-img" src="~/Content/images/45.png" alt="">
+                        <h4>Xe 45 chỗ</h4>
+                        <p class="card-text">
+                            Universe
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

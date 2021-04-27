@@ -1,0 +1,12 @@
+.custom_underline {
+  -webkit-text-decoration: orange solid underline;
+  text-decoration: orange solid underline;
+  -webkit-text-underline-position: under;
+  text-underline-position: under;
+}
+.cat-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-top: -50px;
+}
