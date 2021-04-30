@@ -245,6 +245,7 @@
     <Content Include="Views\GiamDoc\Index.cshtml" />
     <Content Include="Views\KeToan\Index.cshtml" />
     <Content Include="Views\User\XemThongTinCaNhan.cshtml" />
+    <Content Include="Views\KeToan\QuanLyXe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
