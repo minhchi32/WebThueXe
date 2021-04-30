@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebThueXe.Models.LoaiXe>
+
+@{
+    ViewBag.Title = "QuanLyLoaiXe";
+    Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
+}
+
+<h2>QuanLyLoaiXe</h2>
+
+<p>
+    @Html.ActionLink("Thêm loại xe", "ThemLoaiXe")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.maLoaiXe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tenLoaiXe)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.maLoaiXe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenLoaiXe)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa loại xe", "SuaLoaiXe", new { id = item.maLoaiXe }) |
+            @Html.ActionLink("Xóa loại xe", "XoaLoaiXe", new { id = item.maLoaiXe })
+        </td>
+    </tr>
+}
+
+</table>

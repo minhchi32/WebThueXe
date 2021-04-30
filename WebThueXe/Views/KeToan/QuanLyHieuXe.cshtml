@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebThueXe.Models.HieuXe>
+
+@{
+    ViewBag.Title = "QuanLyHieuXe";
+    Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
+}
+
+<h2>HieuXe</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ThemHieuXe")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.maHieuXe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tenHieuXe)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.maHieuXe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenHieuXe)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "SuaHieuXe", new { id = item.maHieuXe }) |
+            @Html.ActionLink("Delete", "XoaHieuXe", new { id = item.maHieuXe })
+        </td>
+    </tr>
+}
+
+</table>
