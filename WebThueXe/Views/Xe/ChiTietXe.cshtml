@@ -1,10 +1,11 @@
-﻿
+﻿@model WebThueXe.Models.Xe
+
 @{
     ViewBag.Title = "ChiTietXe";
     Layout = "~/Views/Shared/_LayoutTimKiem.cshtml";
 }
 
-<h5>Ten xe</h5>
+<h5>@Html.DisplayFor(model => model.tenXe)</h5>
 <div class="container" style="border: 1px solid black">
     <br />
     <div class="row">
@@ -47,15 +48,15 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h5>Hiệu xe</h5>
+                                    <h5>@Html.DisplayFor(model => model.HieuXe.tenHieuXe)</h5>
                                     <hr />
-                                    <p>Loại xe</p>
+                                    <p>Loại xe: @Html.DisplayFor(model => model.LoaiXe.tenLoaiXe)</p>
                                     <hr />
                                     <p>Máy lạnh</p>
                                     <hr />
                                     <p>CD, MP3</p>
                                     <hr />
-                                    <p>Biển số</p>
+                                    <p>Biển số: @Html.DisplayFor(model => model.bienSo)</p>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +85,7 @@
                     </div>
                     <div class="col-md-6">
                         <p>
-                            <input type="date" class="form-control" id="datetimepickerNgayNhan" value="" />
+                            <input type="date" class="form-control" id="datetimepickerNgayNhan" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
                         </p>
                     </div>
                 </div>
@@ -98,7 +99,7 @@
                     </div>
                     <div class="col-md-6">
                         <p>
-                            <input type="date" class="form-control" id="datetimepickerNgayTra" value="" />
+                            <input type="date" class="form-control" id="datetimepickerNgayTra" value="@(DateTime.Today.AddDays(1).ToString("yyyy-MM-dd"))" />
                         </p>
                     </div>
                 </div>
@@ -114,7 +115,7 @@
             <p>Loại xe</p>
         </div>
         <div class="col-md-6">
-            <p class="text-right">loai xe</p>
+            <p class="text-right">@Html.DisplayFor(model => model.LoaiXe.tenLoaiXe)</p>
         </div>
 
         <hr class="col-md-12" />
@@ -122,14 +123,14 @@
             <p>Giá thuê xe</p>
         </div>
         <div class="col-md-6">
-            <p class="text-right">gia thue</p>
+            <p class="text-right">@Html.DisplayFor(model => model.giaThueXe)</p>
         </div>
         <hr class="col-md-12" />
         <div class="col-md-6">
             <p>Số ngày thuê</p>
         </div>
         <div class="col-md-6">
-            <p class="text-right">so ngay thue</p>
+            <p class="text-right">Số ngày thuê</p>
         </div>
         <hr class="col-md-12" />
         <div class="col-md-6">

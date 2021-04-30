@@ -15,9 +15,9 @@ namespace WebThueXe.Controllers
         {
             return View(database.Xes.ToList());
         }
-        public ActionResult ChiTietXe(int id=0)
+        public ActionResult ChiTietXe(int id=1)
         {
-            return View();
+            return View(database.Xes.Where(s => s.maXe == id).FirstOrDefault());
         }
         public ActionResult HopDongThueXe()
         {
