@@ -28,7 +28,8 @@ namespace WebThueXe.Controllers
             {
                 database.Configuration.ValidateOnSaveEnabled = false;
                 Session["ten"] = check.ten;
-                Session["maQuyen"] = _user.maQuyen;
+                Session["maQuyen"] = check.maQuyen;
+                Session["id"] = check.maNguoiDung;
                 ViewBag.ten = check.ten;
                 switch (check.maQuyen)
                 {
@@ -72,6 +73,10 @@ namespace WebThueXe.Controllers
         {
             Session.Abandon();
             return RedirectToAction("Index", "TrangChu");
+        }
+        public ActionResult XemThongTinCaNhan(int id)
+        {
+            return View(database.NguoiDungs.Where(s => s.maNguoiDung == id).FirstOrDefault());
         }
     }
 }

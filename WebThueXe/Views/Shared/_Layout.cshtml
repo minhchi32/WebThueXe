@@ -61,7 +61,7 @@
                             {
                                 <a class="nav-link dropdown-toggle" href="" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> @Session["ten"]</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown">
-                                    <a class="dropdown-item" href="#">Xem thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="@Url.Action("XemThongTinCaNhan","User",new {id= Session["id"]})">Xem thông tin cá nhân</a>
                                     <a class="dropdown-item" href="@Url.Action("Logout","User")">Đăng xuất</a>
                                 </div>
                             }
