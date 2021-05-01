@@ -11,7 +11,9 @@ namespace WebThueXe.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class Xe
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +23,10 @@ namespace WebThueXe.Models
             this.CTHopDongs = new HashSet<CTHopDong>();
             this.CTPhieuPhats = new HashSet<CTPhieuPhat>();
             this.SoXes = new HashSet<SoXe>();
+            hinh = "~/Content/images/car01.jpg";
+
         }
-    
+
         public int maXe { get; set; }
         public string tenXe { get; set; }
         public string bienSo { get; set; }
@@ -45,5 +49,7 @@ namespace WebThueXe.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SoXe> SoXes { get; set; }
         public virtual TinhTrangXe TinhTrangXe { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase UploadImage { get; set; }
     }
 }

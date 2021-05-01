@@ -6,11 +6,14 @@
 }
 
 <h5>Tất cả loại xe</h5>
+<p>
+    @Html.ActionLink("Thêm xe", "ThemXe")
+</p>
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-md-12" style="border: 1px solid black" id="@Html.DisplayFor(model=>item.maXe)" onclick="">
+            <div class="col-md-12" style="border: 1px solid black" id="@Html.DisplayFor(model=>item.maXe)">
                 <br />
                 <div class="container">
                     <div class="row">
@@ -36,6 +39,15 @@
                                     </div>
                                     <div class="col-md-12">
                                         <p>@Html.DisplayFor(model => item.moTaXe)</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        @Html.ActionLink("Edit", "SuaThongTinXe", new { id = item.maXe }) 
+                                    </div>
+                                    <div class="col-md-4">
+                                        @Html.ActionLink("Detail", "ChiTietThongTinXe", new { id = item.maXe }) 
+                                    </div>
+                                    <div class="col-md-4">
+                                        @Html.ActionLink("Delete", "XoaXe", new { id = item.maXe }) 
                                     </div>
                                 </div>
                             </div>

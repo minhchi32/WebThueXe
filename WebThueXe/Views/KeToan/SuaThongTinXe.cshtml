@@ -1,0 +1,84 @@
+﻿@model WebThueXe.Models.Xe
+
+@{
+    ViewBag.Title = "SuaThongTinXe";
+    Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
+}
+
+<h2>SuaThongTinXe</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.maXe)
+
+    <div class="container">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.tenXe)</th>
+                    <td>@Html.EditorFor(model => model.tenXe, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    @Html.ValidationMessageFor(model => model.tenXe, "", new { @class = "text-danger" })
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.bienSo)</th>
+                    <td>@Html.EditorFor(model => model.bienSo, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    @Html.ValidationMessageFor(model => model.bienSo, "", new { @class = "text-danger" })
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.giaXe)</th>
+                    <td>@Html.EditorFor(model => model.giaXe, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    @Html.ValidationMessageFor(model => model.giaXe, "", new { @class = "text-danger" })
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.moTaXe)</th>
+                    <td>@Html.EditorFor(model => model.moTaXe, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    @Html.ValidationMessageFor(model => model.moTaXe, "", new { @class = "text-danger" })
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.TinhTrangXe.tenTinhTrangXe)</th>
+                    <td>@Html.DropDownListFor(model => model.maTinhTrangXe, ViewBag.DsTinhTrangXe as SelectList, new { @class = "form-control" })</td>
+                    @Html.ValidationMessageFor(model => model.maTinhTrangXe, "", new { @class = "text-danger" })
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.giaThueXe)</th>
+                    <td>@Html.EditorFor(model => model.giaThueXe, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    @Html.ValidationMessageFor(model => model.giaThueXe, "", new { @class = "text-danger" })
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.LoaiXe.tenLoaiXe)</th>
+                    <td>@Html.DropDownListFor(model => model.maLoaiXe, ViewBag.DsLoaiXe as SelectList, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.HieuXe.tenHieuXe)</th>
+                    <td>@Html.DropDownListFor(model => model.maHieuXe, ViewBag.DsHieuXe as SelectList, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.hinh)</th>
+                    <td>
+                        <img src="@Html.DisplayFor(model => model.hinh)" alt="hinh" style="width:350px;height:200px" id="previewImg" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="file" name="UploadImage" onchange="ChangeImage(this,document.getElementById('previewImg'))" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "QuanLyXe")
+</div>

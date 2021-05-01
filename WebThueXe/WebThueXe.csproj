@@ -254,6 +254,10 @@
     <Content Include="Views\KeToan\ThemHieuXe.cshtml" />
     <Content Include="Views\KeToan\SuaHieuXe.cshtml" />
     <Content Include="Views\KeToan\XoaHieuXe.cshtml" />
+    <Content Include="Views\KeToan\ChiTietThongTinXe.cshtml" />
+    <Content Include="Views\KeToan\SuaThongTinXe.cshtml" />
+    <Content Include="Views\KeToan\ThemXe.cshtml" />
+    <Content Include="Views\KeToan\XoaXe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
