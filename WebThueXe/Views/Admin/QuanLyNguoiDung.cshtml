@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebThueXe.Models.NguoiDung>
+
+@{
+    ViewBag.Title = "QuanLyNguoiDung";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>QuanLyNguoiDung</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ThemNguoiDung")
+</p>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.maNguoiDung)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ten)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.SDT)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.diaChi)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.NganHang.tenNganHang)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Quyen.tenQuyen)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.maNguoiDung)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ten)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SDT)</td>
+                    <td>@Html.DisplayFor(modelItem => item.diaChi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NganHang.tenNganHang)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quyen.tenQuyen)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "SuaThongTinNguoiDung", new { id = item.maNguoiDung }) |
+                        @Html.ActionLink("Details", "ChiTietThongTinNguoiDung", new { id = item.maNguoiDung }) |
+                        @Html.ActionLink("Delete", "XoaNguoiDung", new { id = item.maNguoiDung })
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
