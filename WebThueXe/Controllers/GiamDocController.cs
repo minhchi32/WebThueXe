@@ -13,5 +13,12 @@ namespace WebThueXe.Controllers
         {
             return View();
         }
+        #region Quản lý người dùng
+
+        #endregion
+
+        #region Quản lý phân quyền
+
+        #endregion
     }
 }

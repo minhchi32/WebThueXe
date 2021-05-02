@@ -62,6 +62,18 @@
                                 <a class="nav-link dropdown-toggle" href="" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> @Session["ten"]</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown">
                                     <a class="dropdown-item" href="@Url.Action("XemThongTinCaNhan","User",new {id= Session["id"]})">Xem thông tin cá nhân</a>
+                                    @switch (Session["maQuyen"])
+                                    {
+                                        case 1:
+                                            <a class="dropdown-item" href="@Url.Action("Index","Admin")">Admin</a>
+                                            break;
+                                        case 3:
+                                            <a class="dropdown-item" href="@Url.Action("Index","GiamDoc")">Giám đốc</a>
+                                            break;
+                                        case 4:
+                                            <a class="dropdown-item" href="@Url.Action("Index","KeToan")">Kế toán</a>
+                                            break;
+                                    }
                                     <a class="dropdown-item" href="@Url.Action("Logout","User")">Đăng xuất</a>
                                 </div>
                             }
