@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-md-6">
                         <p>
-                            <input type="date" class="form-control" id="datetimepickerNgayNhan" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                            <input type="date" class="form-control" id="datetimepickerNgayNhan1" onchange="countDay()" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
                         </p>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-md-6">
                         <p>
-                            <input type="date" class="form-control" id="datetimepickerNgayTra" value="@(DateTime.Today.AddDays(1).ToString("yyyy-MM-dd"))" />
+                            <input type="date" class="form-control" id="datetimepickerNgayTra1" onchange="countDay()" value="@(DateTime.Today.AddDays(1).ToString("yyyy-MM-dd"))" />
                         </p>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
             <p>Số ngày thuê</p>
         </div>
         <div class="col-md-6">
-            <p class="text-right">Số ngày thuê</p>
+            <p class="text-right" onchange="countDay()" id="SoNgayThue"></p>
         </div>
         <hr class="col-md-12" />
         <div class="col-md-6">
@@ -145,3 +145,18 @@
     </button>
 </div>
 
+<script>
+    function countDay() {
+        const date1 = Date.parse(document.getElementById("datetimepickerNgayNhan1").value);
+        const date2 = Date.parse(document.getElementById("datetimepickerNgayTra1").value);
+        console.log(date1);
+        console.log(date2);
+        const oneDay = 24 * 60 * 60 * 1000;
+
+        const diffDays = Math.round(Math.abs((date2 - date1) / oneDay));
+        console.log(diffDays);
+        document.getElementById("SoNgayThue").innerHTML = diffDays;
+        return diffDays;
+    }
+
+</script>
