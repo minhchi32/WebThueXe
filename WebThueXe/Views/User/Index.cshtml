@@ -10,22 +10,28 @@
         <section class="row justify-content-center">
             <section class="col-12 col-sm-8 col-md-4 form-container">
                 <h2>Đăng nhập</h2>
-                <form>
+                <form class="form-container">
                     <div class="form-group">
-                        <label>@Html.LabelFor(model => model.username)</label>
-                        @Html.TextBoxFor(model => model.username, new { style = "field-validation-error" })
+                        <b>Tài khoản</b>
+                        @Html.TextBoxFor(model => model.username, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập tài khoản" })
+                        @Html.ValidationMessageFor(model => model.username)
+
                     </div>
                     <div class="form-group">
-                        <label>@Html.LabelFor(model => model.password)</label>
-                        @Html.TextBoxFor(model => model.password, new { style = "field-validation-error" })
+                        <b>Mật khẩu</b>
+                        @Html.TextBoxFor(model => model.password, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập mật khẩu", @type = "password" })
+                        @Html.ValidationMessageFor(model => model.password)
+                        @if (ViewBag.ErrorInfo == null)
+                        {
+                            <p>@ViewBag.ErrorInfo</p>
+                        }
                     </div>
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                        </label>
+                    <button type="submit" value="Login" class="btn btn-primary btn-block" style="padding: 10px;"><b>Đăng nhập</b></button>
+                    <hr>
+                    <div class="form-group">
+                        <p style="float: left;">Bạn chưa có tài khoản? <a href="@Url.Action("Register", "User")" class="card-link">Đăng ký ngay</a></p>
                     </div>
-                    <p>Chưa có tài khoản?<a href="@Url.Action("Register", "User")">Đăng ký</a></p>
-                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    <br>
                 </form>
             </section>
         </section>

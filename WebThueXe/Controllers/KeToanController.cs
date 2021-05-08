@@ -62,7 +62,7 @@ namespace WebThueXe.Controllers
             }
             catch
             {
-                return Content("lỗi thêm mới");
+                return View("ThemXe",xe);
             }
         }
         public ActionResult SuaThongTinXe(int id)
@@ -80,7 +80,7 @@ namespace WebThueXe.Controllers
         [HttpPost]
         public ActionResult SuaThongTinXe(int id, Xe xe)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var dsTinhTrangXe = database.TinhTrangXes.ToList();
                 var dsLoaiXe = database.LoaiXes.ToList();
@@ -93,9 +93,9 @@ namespace WebThueXe.Controllers
                 return RedirectToAction("QuanLyXe");
 
             }
-            catch (Exception e)
+            else
             {
-                return Content(e.ToString());
+                return View();
             }
         }
 
@@ -108,7 +108,6 @@ namespace WebThueXe.Controllers
         {
             try
             {
-
                 xe = database.Xes.Where(s => s.maXe == id).FirstOrDefault();
                 database.Xes.Remove(xe);
                 database.SaveChanges();
@@ -134,15 +133,15 @@ namespace WebThueXe.Controllers
         [HttpPost]
         public ActionResult ThemLoaiXe(LoaiXe loaiXe)
         {
-            try
+            if (ModelState.IsValid)
             {
                 database.LoaiXes.Add(loaiXe);
                 database.SaveChanges();
                 return RedirectToAction("QuanLyLoaiXe");
             }
-            catch
+            else
             {
-                return Content("lỗi thêm mới");
+                return View();
             }
         }
         public ActionResult SuaLoaiXe(int id)
@@ -152,15 +151,15 @@ namespace WebThueXe.Controllers
         [HttpPost]
         public ActionResult SuaLoaiXe(int id, LoaiXe loaiXe)
         {
-            try
+            if (ModelState.IsValid)
             {
                 database.Entry(loaiXe).State = System.Data.Entity.EntityState.Modified;
                 database.SaveChanges();
                 return RedirectToAction("QuanLyLoaiXe");
             }
-            catch (Exception e)
+            else
             {
-                return Content(e.ToString());
+                return View();
             }
         }
         public ActionResult XoaLoaiXe(int id)
@@ -198,15 +197,15 @@ namespace WebThueXe.Controllers
         [HttpPost]
         public ActionResult ThemHieuXe(HieuXe hieuXe)
         {
-            try
+            if (ModelState.IsValid)
             {
                 database.HieuXes.Add(hieuXe);
                 database.SaveChanges();
                 return RedirectToAction("QuanLyHieuXe");
             }
-            catch
+            else
             {
-                return Content("lỗi thêm mới");
+                return View();
             }
         }
         public ActionResult SuaHieuXe(int id)
@@ -216,15 +215,15 @@ namespace WebThueXe.Controllers
         [HttpPost]
         public ActionResult SuaHieuXe(int id, HieuXe hieuXe)
         {
-            try
+            if (ModelState.IsValid)
             {
                 database.Entry(hieuXe).State = System.Data.Entity.EntityState.Modified;
                 database.SaveChanges();
                 return RedirectToAction("QuanLyHieuXe");
             }
-            catch (Exception e)
+            else
             {
-                return Content(e.ToString());
+                return View();
             }
         }
         public ActionResult XoaHieuXe(int id)

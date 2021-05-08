@@ -131,10 +131,13 @@
       <DependentUpon>DBEntities.edmx</DependentUpon>
       <LastGenOutput>DBEntities.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\DBEntities.edmx.diagram">
+      <DependentUpon>DBEntities.edmx</DependentUpon>
+    </Content>
     <Content Include="Models\DBEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBEntities.edmx</DependentUpon>
       <LastGenOutput>DBEntities.cs</LastGenOutput>
+      <DependentUpon>DBEntities.edmx</DependentUpon>
     </Content>
     <Content Include="Web.config" />
   </ItemGroup>
@@ -159,18 +162,18 @@
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DBEntities.Context.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>DBEntities.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DBEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>DBEntities.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\DBEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>DBEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\HieuXe.cs">
@@ -203,9 +206,6 @@
     <Compile Include="Models\SoXe.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>DBEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TinhTrangHopDong.cs">
       <DependentUpon>DBEntities.tt</DependentUpon>
     </Compile>
@@ -223,9 +223,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DBEntities.edmx.diagram">
-      <DependentUpon>DBEntities.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -235,7 +232,6 @@
     <Content Include="Views\Xe\ChiTietXe.cshtml" />
     <Content Include="Views\Xe\HopDongThueXe.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutKeToan.cshtml" />
     <Content Include="Views\Shared\_LayoutGiamDoc.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />

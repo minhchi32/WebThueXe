@@ -38,7 +38,6 @@ namespace WebThueXe.Models
         public virtual DbSet<PhieuPhat> PhieuPhats { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<SoXe> SoXes { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TinhTrangHopDong> TinhTrangHopDongs { get; set; }
         public virtual DbSet<TinhTrangXe> TinhTrangXes { get; set; }
         public virtual DbSet<Xe> Xes { get; set; }

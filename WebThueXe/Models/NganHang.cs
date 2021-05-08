@@ -11,7 +11,8 @@ namespace WebThueXe.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class NganHang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +20,15 @@ namespace WebThueXe.Models
         {
             this.NguoiDungs = new HashSet<NguoiDung>();
         }
-    
+
+
+
+        [Display(Name = "Mã ngân hàng")]
         public int maNganHang { get; set; }
+
+
+        [Display(Name = "Tên ngân hàng")]
+        [Required(ErrorMessage = "Can not empty")]
         public string tenNganHang { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

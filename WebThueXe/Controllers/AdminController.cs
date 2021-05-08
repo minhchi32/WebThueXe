@@ -113,15 +113,15 @@ namespace WebThueXe.Controllers
         [HttpPost]
         public ActionResult ThemPhanQuyen(Quyen quyen)
         {
-            try
+            if (ModelState.IsValid)
             {
                 database.Quyens.Add(quyen);
                 database.SaveChanges();
                 return RedirectToAction("QuanLyPhanQuyen");
             }
-            catch
+            else
             {
-                return Content("lỗi thêm mới");
+                return View();
             }
         }
         public ActionResult SuaPhanQuyen(int id)
@@ -131,15 +131,15 @@ namespace WebThueXe.Controllers
         [HttpPost]
         public ActionResult SuaPhanQuyen(int id, Quyen quyen)
         {
-            try
+            if (ModelState.IsValid)
             {
                 database.Entry(quyen).State = System.Data.Entity.EntityState.Modified;
                 database.SaveChanges();
                 return RedirectToAction("QuanLyPhanQuyen");
             }
-            catch (Exception e)
+            else
             {
-                return Content(e.ToString());
+                return View();
             }
         }
         public ActionResult XoaPhanQuyen(int id)

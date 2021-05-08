@@ -23,5 +23,21 @@ namespace WebThueXe.Controllers
         {
             return View();
         }
+        public ActionResult Search()
+        {
+            if (ModelState.IsValid)
+            {
+                var dsLoaiXe = database.LoaiXes.ToList();
+                var dsHieuXe = database.HieuXes.ToList();
+                ViewBag.DsLoaiXe = new SelectList(dsLoaiXe, "maLoaiXe", "tenLoaiXe");
+                ViewBag.DsHieuXe = new SelectList(dsHieuXe, "maHieuXe", "tenHieuXe");
+                return View();
+            }
+            else
+            {
+                return View();
+            }
+
+        }
     }
 }
