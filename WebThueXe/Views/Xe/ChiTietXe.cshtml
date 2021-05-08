@@ -123,7 +123,7 @@
             <p>Giá thuê xe</p>
         </div>
         <div class="col-md-6">
-            <p class="text-right">@Html.DisplayFor(model => model.giaThueXe)</p>
+            <p class="text-right"@Html.DisplayFor(model => model.giaThueXe, new { @id = "giaThue" })</p>
         </div>
         <hr class="col-md-12" />
         <div class="col-md-6">
@@ -137,7 +137,7 @@
             <p>Thành tiền</p>
         </div>
         <div class="col-md-6">
-            <p class="text-right">thanh tien</p>
+            <p class="text-right" onchange="totalPrice()" id="thanhTien"></p>
         </div>
     </div>
     <button type="submit" class="btn btn-lg btn-primary text-right" onclick="location.href='@Url.Action("HopDongThueXe", "Xe")'">
@@ -149,14 +149,21 @@
     function countDay() {
         const date1 = Date.parse(document.getElementById("datetimepickerNgayNhan").value);
         const date2 = Date.parse(document.getElementById("datetimepickerNgayTra").value);
-        console.log(date1);
-        console.log(date2);
+        //console.log(date1);
+        //console.log(date2);
         const oneDay = 24 * 60 * 60 * 1000;
 
         const diffDays = Math.round(Math.abs((date2 - date1) / oneDay));
-        console.log(diffDays);
+        //console.log(diffDays);
         document.getElementById("SoNgayThue").innerHTML = diffDays;
         return diffDays;
     }
-
+    function totalPrice() {
+        const giaThue = parseInt(document.getElementById("giaThue").value);
+        const soNgayThue = parseInt(document.getElementById("SoNgayThue").value);
+        const tongTienThue = giaThue * soNgayThue;
+        console.log(tongTienThue);
+        document.getElementById("thanhTien").innerHTML = tongTienThue;
+        return tongTienThue;
+    }
 </script>
