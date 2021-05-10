@@ -1,10 +1,12 @@
-﻿
+﻿@model WebThueXe.Models.CTHopDong
+
 @{
-    ViewBag.Title = "HopDongThueXe";
-    Layout = "~/Views/Shared/_LayoutTimKiem.cshtml";
+    ViewBag.Title = "Create_Detail";
+    Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
 }
 
-<h5>Hợp đồng thuê xe</h5>
+
+<h5>Chi chiết Hợp đồng thuê xe</h5>
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -13,12 +15,32 @@
                 <div class="row" style="justify-content:center">
                     <div class="col-md-12">
                         <h4 class="text-center">Thông tin hợp đồng</h4>
-                    </div>
-                    <div class="col-md-6">
-                        Mã hợp đồng:
-                    </div>
-                    <div class="col-md-6">
-                        Tên xe:
+                        <table class="table">
+                            @*<tr>
+                                <td>
+                                    @Html.LabelFor(model => model.maHopDong)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.maHopDong)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(model => model.maCTHopDong):
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.maCTHopDong)
+                                    @Html.ValidationMessageFor(model => model.maCTHopDong, "", new { @class = "text-danger" })
+                                </td>
+                                <td>
+                                    @Html.LabelFor(model => model.diaChiTraXe):
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.diaChiTraXe)
+                                    @Html.ValidationMessageFor(model => model.diaChiTraXe, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>*@
+                        </table>
                     </div>
                     <div class="col-md-12">
                         <hr>
@@ -31,15 +53,6 @@
                     </div>
                     <div class="col-md-12">
                         <hr>
-                    </div>
-                    <div class="col-md-6">
-                        Số ngày:
-                    </div>
-                    <div class="col-md-6">
-                        Giá thuê trong 1 ngày:
-                    </div>
-                    <div class="col-md-6">
-                        Tổng tiền thuê xe:
                     </div>
                     <div class="col-md-12">
                         <hr>
@@ -71,20 +84,15 @@
                     </div>
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-lg btn-primary">
-                            Đặt xe ngay
+                            Lập hợp đồng
                         </button>
                     </div>
                 </div>
             </div>
             <hr>
         </div>
-        <div class="col-md-3">
-            <blockquote>
-                "Cám ơn bạn đã đặt <strong>ten xe</strong>. Xin vui lòng điền thông tin chi tiết của bạn bên
-                trái và chúng tôi sẽ liên hệ với bạn qua điện thoại hoặc email trong vòng 24 đến 48 giờ với một mức
-                giá thích hợp và hành trình tốt nhất"
-            </blockquote>
-        </div>
     </div>
 </div>
+
+
 

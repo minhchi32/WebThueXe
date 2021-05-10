@@ -3,13 +3,14 @@
     ViewBag.Title = "Đăng nhập";
     Layout = "~/Views/Shared/_LayoutForm.cshtml";
 }
+<link href="~/Content/Site.css" rel="stylesheet" />
 @using (Html.BeginForm("Login", "User"))
 {
     @Html.AntiForgeryToken()
     <section class="container-fluid" style="height:100%">
         <section class="row justify-content-center">
-            <section class="col-12 col-sm-8 col-md-4 form-container">
-                <h2>Đăng nhập</h2>
+            <section class="col-12 col-sm-8 col-md-4 form-container form-login">
+                <h2 style="text-align:center">Đăng nhập</h2>
                 <form class="form-container">
                     <div class="form-group">
                         <b>Tài khoản</b>

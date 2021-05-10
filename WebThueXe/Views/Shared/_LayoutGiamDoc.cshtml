@@ -1,32 +1,61 @@
 ﻿
 @{
-    ViewBag.Title = "_LayoutGiamDoc";
+    ViewBag.Title = "_LayoutAdmin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="~/Content/css/admin-style.css" rel="stylesheet" />
+</head>
+<body>
 
-<main>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Thống kê doanh thu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Thống kê danh sách hợp đồng thuê xe</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Thống kê xe</a>
-                        </li>
-                    </ul>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
 
+                        <a class="nav-link" href="#">Thống kê doanh thu</a>
+                        <a class="nav-link" href="#">Thống kê danh sách hợp đồng thuê xe</a>
+                        <a class="nav-link" href="#">Thống kê xe</a>
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Start Bootstrap
                 </div>
             </nav>
-            <menu class="col-md-10">
-                @RenderBody()
-            </menu>
         </div>
+        <div id="layoutSidenav_content" style="padding:20px">
+            @RenderBody()
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
     </div>
-</main>
+</body>
+</html>
 
