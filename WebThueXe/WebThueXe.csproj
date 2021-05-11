@@ -288,9 +288,9 @@
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Views\HopDong\Index.cshtml" />
-    <Content Include="Views\HopDong\Create.cshtml" />
-    <Content Include="Views\HopDong\Create_Detail.cshtml" />
+    <Content Include="Views\HopDong\DanhSachHopDong.cshtml" />
+    <Content Include="Views\HopDong\ThemHopDong.cshtml" />
+    <Content Include="Views\HopDong\LapThongTinHopDong.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

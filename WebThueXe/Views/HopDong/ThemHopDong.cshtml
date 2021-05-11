@@ -1,12 +1,11 @@
-﻿@model WebThueXe.Models.CTHopDong
+﻿@model WebThueXe.Models.HopDong
 
 @{
-    ViewBag.Title = "Create_Detail";
+    ViewBag.Title = "ThemHopDong";
     Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
 }
 
-
-<h5>Chi chiết Hợp đồng thuê xe</h5>
+<h5>Hợp đồng thuê xe</h5>
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -16,21 +15,22 @@
                     <div class="col-md-12">
                         <h4 class="text-center">Thông tin hợp đồng</h4>
                         <table class="table">
-                            @*<tr>
+                            <tr>
                                 <td>
-                                    @Html.LabelFor(model => model.maHopDong)
+                                    @Html.LabelFor(model => model.maKhach)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(model => model.maHopDong)
+                                    @Html.EditorFor(model => model.maKhach)
+                                    @Html.ValidationMessageFor(model => model.maKhach, "", new { @class = "text-danger" })
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    @Html.LabelFor(model => model.maCTHopDong):
+                                    @Html.LabelFor(model => model.diaChiNhanXe):
                                 </td>
                                 <td>
-                                    @Html.EditorFor(model => model.maCTHopDong)
-                                    @Html.ValidationMessageFor(model => model.maCTHopDong, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.diaChiNhanXe)
+                                    @Html.ValidationMessageFor(model => model.diaChiNhanXe, "", new { @class = "text-danger" })
                                 </td>
                                 <td>
                                     @Html.LabelFor(model => model.diaChiTraXe):
@@ -39,7 +39,7 @@
                                     @Html.EditorFor(model => model.diaChiTraXe)
                                     @Html.ValidationMessageFor(model => model.diaChiTraXe, "", new { @class = "text-danger" })
                                 </td>
-                            </tr>*@
+                            </tr>
                         </table>
                     </div>
                     <div class="col-md-12">

@@ -11,15 +11,15 @@ namespace WebThueXe.Controllers
     {
         DBCarRentalEntities db = new DBCarRentalEntities();
         // GET: HopDong
-        public ActionResult Index()
+        public ActionResult DanhSachHopDong()
         {
             return View(db.HopDongs.ToList());
         }
-        public ActionResult Create()
+        public ActionResult ThemHopDong()
         {
             return View();
         }
-        public ActionResult Create_Detail()
+        public ActionResult LapThongTinHopDong()
         {
             return View();
         }
