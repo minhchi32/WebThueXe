@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WebThueXe.Models.NguoiDung>
+@using WebThueXe.Models
 
 @{
     ViewBag.Title = "QuanLyNguoiDung";
@@ -11,8 +12,25 @@
     @Html.ActionLink("Create New", "ThemNguoiDung")
 </p>
 
+<form>
+    <div class="form-row align-items-center">
+        <div class="col-auto my-1">
+            <input type="text" id="search-text" name="ten" class="form-control" placeholder="Nhập tên khách hàng" aria-label="Nhập tên khách hàng" aria-describedby="button-addon2">
+        </div>
+        <div class="col-auto my-1">
+            @Html.DropDownList("maQuyen", new SelectList(new string[] { }), new { @class = "form-control", @id = "maQuyen", name = "maQuyen" })
+        </div>
+        <div class="col-auto my-1">
+            @Html.ActionLink("Tìm kiếm", "QuanLyNguoiDung", "Admin", new { ten = "tenval", maQuyen = "maQuyenval"}, new { id = "TimKiemId", @class = "btn btn-primary text-center" })
+        </div>
+    </div>
+</form>
+
+
 <div class="container">
+
     <table class="table">
+
         <thead>
             <tr>
                 <th scope="col">@Html.DisplayNameFor(model => model.maNguoiDung)</th>
@@ -45,4 +63,30 @@
         </tbody>
     </table>
 </div>
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script>
+    $.ajax({
+        url: "/Admin/SelectQuyen",
+        type: "POST",
+        dataType: "json",
+        success: function (response) {
+            if (response.status == true) {
+                var html = '<option value="">--Chọn quyền--</option>"';
+                var data = response.data;
+                $.each(data, function (i, val) {
+                    html += '<option value="' + val.maQuyen + '">' + val.tenQuyen + '</option>"'
+                });
+                $('#maQuyen').html(html);
+            }
+        }
+    });
+    $('#TimKiemId').click(function () {
+        $('#TimKiemId').attr('href', function () {
+            return this.href.replace('tenval', $('#search-text').val());
+        });
+        $('#TimKiemId').attr('href', function () {
+            return this.href.replace('maQuyenval', $('#maQuyen').val());
+        });
+    })
 
+</script>

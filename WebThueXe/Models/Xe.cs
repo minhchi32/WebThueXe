@@ -21,16 +21,17 @@ namespace WebThueXe.Models
         public Xe()
         {
             this.CTHoaDons = new HashSet<CTHoaDon>();
-            this.CTHopDongs = new HashSet<CTHopDong>();
             this.CTPhieuPhats = new HashSet<CTPhieuPhat>();
+            this.HopDongs = new HashSet<HopDong>();
+            this.SoDatXes = new HashSet<SoDatXe>();
             this.SoXes = new HashSet<SoXe>();
             hinh = "~/Content/images/car01.jpg";
-
         }
-        [Display(Name ="Mã xe")]
+
+        [Display(Name = "Mã xe")]
         public int maXe { get; set; }
 
-        [Display(Name ="Tên xe")]
+        [Display(Name = "Tên xe")]
         [Required(ErrorMessage = "Can not empty")]
         public string tenXe { get; set; }
 
@@ -64,15 +65,18 @@ namespace WebThueXe.Models
         [Display(Name = "Hình")]
         [Required(ErrorMessage = "Can not empty")]
         public string hinh { get; set; }
+        public string hinhplus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHoaDon> CTHoaDons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CTHopDong> CTHopDongs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTPhieuPhat> CTPhieuPhats { get; set; }
         public virtual HieuXe HieuXe { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HopDong> HopDongs { get; set; }
         public virtual LoaiXe LoaiXe { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SoDatXe> SoDatXes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SoXe> SoXes { get; set; }
         public virtual TinhTrangXe TinhTrangXe { get; set; }

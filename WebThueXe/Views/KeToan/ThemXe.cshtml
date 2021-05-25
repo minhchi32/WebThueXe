@@ -5,9 +5,13 @@
     Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
 }
 
+@section script{
+    <script src="~/Scripts/script.js"></script>
+}
+
 <h2>ThemXe</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("ThemXe", "KeToan", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -74,13 +78,20 @@
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.hinh)</th>
                     <td>
-                        <img src="@Html.DisplayFor(model => model.hinh)" alt="hinh" style="width:350px;height:200px" id="previewImg" />
+                        <img src="@Url.Content(Model.hinh)" height="150" width="150" id="previewImg" />
+                        <input type="file" name="UploadImage" onchange="ChangeImage(this, document.getElementById('previewImg'))" />
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <input type="file" name="UploadImage" onchange="ChangeImage(this,document.getElementById('previewImg'))" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.hinhplus)</th>
+                    <td>
+                        <input type="file" id="flImage" name="ImageUpload" onchange='UploadTempImage()' class="form-control">
+                        <div id="imageList"></div>
                     </td>
                 </tr>
                 <tr>
@@ -98,3 +109,48 @@
 <div>
     @Html.ActionLink("Back to List", "QuanLyXe")
 </div>
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script>
+    function UploadTempImage() {
+        var formData = new FormData();
+        formData.append('file', $('#flImage')[0].files[0]);
+        $.ajax({
+            type: "POST",
+            url: "/KeToan/SaveToTemp",
+            data: formData,
+            success: function (response) {
+                if (response != null) {
+                    var my_path = "/Content/tmp/" + response;
+                    $("#imageList").append('<div style="float:left"><img src="' + my_path + '" width="200" height="150"/><a href="#" class="btn-delImage"><span aria-hidden="true">&times;</span></a></div>')
+                    $(".btn-delImage").click(function () {
+                        var text = $(this).parent().children().prop("src");
+                        var sub = text.substr(text.indexOf('C'), text.length);
+                        $(this).parent().remove();
+                        console.log(sub);
+                        $.ajax({
+                            type: "POST",
+                            url: "/KeToan/RemoveFile",
+                            dataType: "json",
+                            data: {
+                                url: sub
+                            },
+                            success: function (response2) {
+                                if (response2 != null) {
+                                    console.log(response2);
+                                }
+                            },
+                            error: function () {
+                                alert("Whoops something went wrong 2!");
+                            }
+                        });
+                    })
+                }
+            },
+            processData: false,
+            contentType: false,
+            error: function () {
+                alert("Whoops something went wrong!");
+            }
+        });
+    }
+</script>

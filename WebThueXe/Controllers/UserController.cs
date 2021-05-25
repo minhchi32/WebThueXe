@@ -10,6 +10,11 @@ namespace WebThueXe.Controllers
     public class UserController : Controller
     {
         DBCarRentalEntities database = new DBCarRentalEntities();
+        public NguoiDung GetCurrentUser()
+        {
+            NguoiDung currentUser = (NguoiDung)Session["NguoiDung"];
+            return currentUser;
+        }
         // GET: User
         public ActionResult Index()
         {
@@ -27,6 +32,7 @@ namespace WebThueXe.Controllers
             else
             {
                 database.Configuration.ValidateOnSaveEnabled = false;
+                Session["NguoiDung"] = check;
                 Session["ten"] = check.ten;
                 Session["maQuyen"] = check.maQuyen;
                 Session["id"] = check.maNguoiDung;
@@ -42,6 +48,19 @@ namespace WebThueXe.Controllers
                     default:
                         return RedirectToAction("Index", "TrangChu");
                 }
+            }
+        }
+        public ActionResult DanhSachDatXe()
+        {
+            NguoiDung nguoiDung = (NguoiDung)Session["NguoiDung"];
+            if (Session["NguoiDung"] != null)
+            {
+                return View(database.HopDongs.Where(s => s.maNguoiDung == nguoiDung.maNguoiDung).ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
             }
         }
         public ActionResult Register()

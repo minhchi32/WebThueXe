@@ -28,7 +28,7 @@ namespace WebThueXe.Models
         [Display(Name = "Tên tình trạng hợp đồng")]
         [Required(ErrorMessage = "Can not empty")]
         public string tenTinhTrangHopDong { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HopDong> HopDongs { get; set; }
     }

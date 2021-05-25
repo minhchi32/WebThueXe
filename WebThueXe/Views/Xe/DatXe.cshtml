@@ -1,0 +1,41 @@
+﻿@model WebThueXe.Models.PhuongThucThanhToan
+
+@{
+    ViewBag.Title = "DatXe";
+    Layout = "~/Views/Shared/_LayoutTimKiem.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <blockquote>
+                "Cám ơn bạn đã đặt xe tại trang web của chúng tôi, xe đã đặt tuy nhiên hệ thống mới đưa đơn đặt xe của bạn vào trạng thái chờ duyệt cho đến khi bạn thực hiện đầy đủ nghĩa vụ thanh toán trong vòng 24h. Chúng tôi sẽ liên hệ với bạn thông qua thông tin mà bạn đã cung cấp cho chúng tôi trong thời gian tối đa 24h kể từ khi nhận được đơn đặt xe của bạn
+            </blockquote>
+            <div class="col text-center">
+                <button class="btn btn-primary">In hợp đồng</button>
+            </div>
+
+            @if (@Model.maPhuongThucThanhToan == 1)
+            {
+                <h3 style="text-align:center">@Model.tenPhuongThucThanhToan</h3>
+                <p style="text-align:center">Bạn sẽ đến văn phòng của chúng tôi để thanh toán <a href="#" style="text-decoration:none; color:black;font-weight:bold">click để xem địa chỉ</a></p>
+            }
+            else if (@Model.maPhuongThucThanhToan == 2)
+            {
+                <h3 style="text-align:center">@Model.tenPhuongThucThanhToan</h3>
+                <p style="text-align:center">Bạn sẽ đến bãi xe của chúng tôi để thanh toán khi nhận xe <a style="text-decoration:none; color:black;font-weight:bold">click để xem địa chỉ</a></p>
+
+            }
+            else
+            {
+                <h3 style="text-align:center">@Model.tenPhuongThucThanhToan</h3>
+                <div class="col text-center">
+                    <button class="btn btn-primary">Thanh toán</button>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+

@@ -54,7 +54,7 @@ namespace WebThueXe.Models
         [Display(Name = "Tiền thuê")]
         [Required(ErrorMessage = "Can not empty")]
         public int tienThue { get; set; }
-    
+
         public virtual HopDong HopDong { get; set; }
         public virtual NguoiDung NguoiDung { get; set; }
         public virtual Xe Xe { get; set; }

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "_LayoutAdmin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -20,7 +19,7 @@
     <link href="~/Content/css/admin-style.css" rel="stylesheet" />
 </head>
 <body>
-    
+
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -55,28 +54,7 @@
         </div>
 
     </div>
+    <script src="~/Scripts/script.js"></script>
 </body>
 </html>
-@*<main>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-dark sidebar" style="height:100%;">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("QuanLyNguoiDung","Admin")">Quản lý người dùng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("QuanLyPhanQuyen","Admin")">Quản lý phân quyền</a>
-                        </li>
-                    </ul>
-
-                </div>
-            </nav>
-            <menu class="col-md-10">
-                @RenderBody()
-            </menu>
-        </div>
-    </div>
-</main>*@
 

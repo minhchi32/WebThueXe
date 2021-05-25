@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using WebThueXe.Models;
 
 namespace WebThueXe.Controllers
@@ -35,7 +36,8 @@ namespace WebThueXe.Controllers
             ViewBag.DsTinhTrangXe = new SelectList(dsTinhTrangXe, "maTinhTrangXe", "tenTinhTrangXe");
             ViewBag.DsLoaiXe = new SelectList(dsLoaiXe, "maLoaiXe", "tenLoaiXe");
             ViewBag.DsHieuXe = new SelectList(dsHieuXe, "maHieuXe", "tenHieuXe");
-            return View();
+            Xe xe = new Xe();
+            return View(xe);
         }
         [HttpPost]
         public ActionResult ThemXe(Xe xe)
@@ -53,11 +55,12 @@ namespace WebThueXe.Controllers
                     string filename = Path.GetFileNameWithoutExtension(xe.UploadImage.FileName);
                     string extent = Path.GetExtension(xe.UploadImage.FileName);
                     filename = filename + extent;
-                    xe.hinh = "~/Content/images/" + filename;
+                    xe.hinh = "/Content/images/" + filename;
                     xe.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
                 }
                 database.Xes.Add(xe);
                 database.SaveChanges();
+                SaveToMainFolder(xe.maXe);
                 return RedirectToAction("QuanLyXe");
             }
             catch
@@ -98,7 +101,91 @@ namespace WebThueXe.Controllers
                 return View();
             }
         }
+        public ActionResult DanhSachDonDatXe()
+        {
+            return View(database.HopDongs.OrderByDescending(s=>s.ngayLapHopDong).ToList());
+        }
+        public ActionResult ChiTietHopDong(int id)
+        {
+            List<Xe> listXe = database.Xes.ToList();
+            List<PhuongThucThanhToan> phuongThucThanhToans = database.PhuongThucThanhToans.ToList();
+            List<HopDong> listHopDong = database.HopDongs.ToList();
 
+            var tenXe = from _xe in listXe
+                       join _hopDong1 in listHopDong on _xe.maXe equals _hopDong1.maXe
+                       where _hopDong1.maHopDong == id
+                       select _xe.tenXe;
+            string[] strTenXe = tenXe.ToArray();
+            var donGia = from _xe in listXe
+                         join _hopDong1 in listHopDong on _xe.maXe equals _hopDong1.maXe
+                         where _hopDong1.maHopDong == id
+                         select _xe.giaThueXe;
+            int[] strDonGia = donGia.ToArray();
+            var pttt = from _phuongThucThanhToan in phuongThucThanhToans
+                      join _hopDong1 in listHopDong on _phuongThucThanhToan.maPhuongThucThanhToan equals _hopDong1.maPhuongThucThanhToan
+                      where _hopDong1.maHopDong == id
+                      select _phuongThucThanhToan.tenPhuongThucThanhToan;
+            string[] strPTTT = pttt.ToArray();
+
+            var hopDong = from _hopDong in listHopDong
+                          where _hopDong.maHopDong == id
+                          select new HopDong
+                          {
+                              maHopDong = _hopDong.maHopDong,
+                              maNguoiDung = _hopDong.maNguoiDung,
+                              hotenNguoiDatXe = _hopDong.hotenNguoiDatXe,
+                              email = _hopDong.email,
+                              SDT = _hopDong.SDT,
+                              ghiChu = _hopDong.ghiChu,
+                              maXe = _hopDong.maXe,
+                              soNgayThue = _hopDong.soNgayThue,
+                              ngayLapHopDong = _hopDong.ngayLapHopDong,
+                              ngayThue = _hopDong.ngayThue,
+                              ngayTra = _hopDong.ngayTra,
+                              diaChiNhanXe = _hopDong.diaChiNhanXe,
+                              TongTien = _hopDong.TongTien,
+                              daThanhToan = _hopDong.daThanhToan,
+                              daDuyet = _hopDong.daDuyet,
+                              yeuCauHuyDon = _hopDong.yeuCauHuyDon,
+                              maTinhTrangHopDong = _hopDong.maTinhTrangHopDong,
+                              maPhuongThucThanhToan = _hopDong.maPhuongThucThanhToan,
+                              donGia = strDonGia[0],
+                              tenXe = strTenXe[0],
+                              tenLoaiThanhToan = strPTTT[0],
+
+                          };
+            return PartialView(hopDong);
+        }
+        public JsonResult DuyetDonDatXe(int id)
+        {
+            var donDatXe = database.HopDongs.Find(id);
+            donDatXe.daDuyet = true;
+            database.SaveChanges();
+            return Json(new
+            {
+                status = true
+            });
+        }
+        public JsonResult XacNhanThanhToan(int id)
+        {
+            var donDatXe = database.HopDongs.Find(id);
+            donDatXe.daThanhToan = true;
+            database.SaveChanges();
+            return Json(new
+            {
+                status = true
+            });
+        }
+        public JsonResult XoaHopDong(int id)
+        {
+            var donDatXe = database.HopDongs.Where(s=>s.maHopDong==id).FirstOrDefault();
+            database.HopDongs.Remove(donDatXe);
+            database.SaveChanges();
+            return Json(new
+            {
+                status = true
+            });
+        }
         public ActionResult XoaXe(int id)
         {
             return View(database.Xes.Where(s => s.maXe == id).FirstOrDefault());
@@ -247,6 +334,106 @@ namespace WebThueXe.Controllers
             }
         }
         #endregion
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult SaveToTemp(HttpPostedFileBase file)
+        {
+            try
+            {
+                string filename = "";
+                string imgepath = "Null";
+                if (file != null)
+                {
+                    filename = file.FileName;
+                    imgepath = filename;
+                    string extension = Path.GetExtension(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/tmp/"), filename);
+                    file.SaveAs(path);
+                }
+                return Json(filename, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        public JsonResult RemoveFile(string url)
+        {
+            try
+            {
+                var path = Path.Combine(Server.MapPath("~/"), url);
+                if (System.IO.File.Exists(path))
+                {
+                    try
+                    {
+                        System.IO.File.Delete(path);
+                        return Json(url, JsonRequestBehavior.AllowGet);
 
+                    }
+                    catch (System.IO.IOException e)
+                    {
+                        return Json(e, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                return Json(url, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex, JsonRequestBehavior.AllowGet);
+            }
+        }
+        /// <summary>
+        /// This method is used to move files from Temp folder to Destinatin folder.
+        /// </summary>
+        /// <returns></returns>
+        public void SaveToMainFolder(int maXe)
+        {
+            var xe = database.Xes.Find(maXe);
+            string fileName = "";
+            string destFile = "";
+            string sourcePath = Server.MapPath("~/Content/tmp/");
+            string targetPath = Server.MapPath("~/Content/images/");
+            XElement xElement = new XElement("Images");
+            if (System.IO.Directory.Exists(sourcePath))
+            {
+                string[] files = System.IO.Directory.GetFiles(sourcePath);
+                // Copy the files. 
+                foreach (string file in files)
+                {
+                    fileName = System.IO.Path.GetFileName(file);
+                    destFile = System.IO.Path.Combine(targetPath, fileName);
+                    System.IO.File.Copy(file, destFile, true);
+                    string tmp = "/Content/images/" + fileName;
+                    xElement.Add(new XElement("Images", tmp));
+                }
+                xe.hinhplus = xElement.ToString();
+                database.SaveChanges();
+                RemoveFiles();
+            }
+        }
+
+        /// <summary>
+        /// Make Temp folder empty once all files are copied to destination folder.
+        /// </summary>
+        public void RemoveFiles()
+        {
+            string sourcePath = Server.MapPath("~/Content/tmp/");
+            string[] files = System.IO.Directory.GetFiles(sourcePath);
+            foreach (string file in files)
+            {
+                if (System.IO.File.Exists(System.IO.Path.Combine(sourcePath, file)))
+                {
+                    try
+                    {
+                        System.IO.File.Delete(file);
+                    }
+                    catch (System.IO.IOException e)
+                    {
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

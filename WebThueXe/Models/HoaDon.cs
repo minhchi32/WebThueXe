@@ -60,7 +60,7 @@ namespace WebThueXe.Models
         [Display(Name = "Mã hợp đồng")]
         [Required(ErrorMessage = "Can not empty")]
         public int maHopDong { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHoaDon> CTHoaDons { get; set; }
         public virtual HopDong HopDong { get; set; }

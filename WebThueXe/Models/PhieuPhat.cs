@@ -39,7 +39,7 @@ namespace WebThueXe.Models
 
         [Display(Name = "Tổng tiền")]
         public int tongTien { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTPhieuPhat> CTPhieuPhats { get; set; }
         public virtual NguoiDung NguoiDung { get; set; }

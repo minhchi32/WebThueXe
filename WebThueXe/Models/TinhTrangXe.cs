@@ -28,7 +28,7 @@ namespace WebThueXe.Models
         [Display(Name = "Tên tình trạng xe")]
         [Required(ErrorMessage = "Can not empty")]
         public string tenTinhTrangXe { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Xe> Xes { get; set; }
     }

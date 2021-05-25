@@ -1,0 +1,246 @@
+﻿@model IEnumerable<WebThueXe.Models.HopDong>
+@using WebThueXe.Models
+
+@{
+    ViewBag.Title = "DanhSachDonDatXe";
+    Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
+}
+
+<h2>DanhSachDonDatXe</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Thông tin khách hàng
+        </th>
+        <th>
+            Trạng thái thanh toán
+        </th>
+        <th>
+            Trạng thái hợp đồng
+        </th>
+        <th>
+            Thông tin hợp đồng
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <span style="font-weight:bold" data-id="@item.maHopDong">@Html.DisplayFor(modelItem => item.maHopDong)</span><br />
+                @Html.DisplayFor(modelItem => item.maXe)
+            </td>
+            <td>
+                <span style="font-weight:bold">@Html.DisplayFor(modelItem => item.hotenNguoiDatXe)</span><br />
+                @Html.DisplayFor(modelItem => item.email)<br />
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @if (item.daThanhToan)
+                {
+                    <p style="font-weight:bold;color:blue">Đã thanh toán</p>
+                }
+                else
+                {
+                    <p style="font-weight:bold;color:red">Chưa thanh toán</p>
+                }
+            </td>
+            <td>
+                @if (item.daDuyet)
+                {
+                    <p style="font-weight:bold;color:blue">Đã duyệt</p>
+                }
+                else
+                {
+                    <p style="font-weight:bold;color:red">Chưa duyệt</p>
+
+                }
+            </td>
+            <td>
+                <p>Ngày nhận: @Html.DisplayFor(model => item.ngayThue)</p>
+                <p>Ngày trả: @Html.DisplayFor(model => item.ngayTra)</p>
+                <p>Số ngày đặt: @Html.DisplayFor(model => item.soNgayThue)</p>
+                <p style="font-weight:bold;color:red;">Tổng tiền: @Html.DisplayFor(model => item.TongTien)</p>
+            </td>
+            <td>
+                <a href="" data-toggle="modal" class="modal-Del" data-id="@item.maHopDong">Xóa</a><br />
+                <a href="" data-toggle="modal" class="modal-Print" data-id="@item.maHopDong">Xem hợp đồng</a><br />
+                @if (item.daDuyet == false)
+                {
+                    <a href="" data-toggle="modal" class="modal-Duyet" data-id="@item.maHopDong">Duyệt đơn đặt xe</a><br />
+                }
+                @if (item.daThanhToan == false)
+                {
+                    <a href="" data-toggle="modal" class="modal-ThanhToan" data-id="@item.maHopDong">Đã thanh toán</a><br />
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="del-DatXe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xóa hợp đồng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa hợp đồng?
+                <input type="hidden" id="hidDelId" value="0" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="Del-DonDat">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="Duyet-DatXe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Duyệt đơn đặt xe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="hidDuyetId" value="0" />
+                Duyệt đơn đặt xe
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="DuyetDonDatXe">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ThanhToan-DatXe" tabindex="-1" role="dialog" aria-labelledby="examplemodallabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="examplemodallabel">xác nhận thanh toán</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                xác nhận thanh toán ?
+                <input type="hidden" id="hidThanhToanId" value="0" />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">đóng</button>
+                <button type="button" class="btn btn-primary" id="thanhToanID">lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Print-DatXe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-url="@Url.Action("ChiTietHopDong","KeToan")">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <input type="hidden" id="hidPrintId" value="0" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">In Hợp Đồng</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script>
+    $('.modal-Del').click(function () {
+        $('#del-DatXe').modal('show');
+        $('#hidDelId').val($(this).data('id'));
+        var id = $('#hidDelId').val();
+        $('#Del-DonDat').click(function () {
+            $.ajax({
+                url: "/KeToan/XoaHopDong",
+                type: "POST",
+                dataType: "json",
+                data: { id: id },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#del-DatXe').modal('hide');
+                        location.reload();
+                    }
+                }
+            })
+        })
+        
+    })
+    $('.modal-Duyet').click(function () {
+        $('#Duyet-DatXe').modal('show');
+        $('#hidDuyetId').val($(this).data('id'));
+        var id = $('#hidDuyetId').val();
+        $('#DuyetDonDatXe').click(function () {
+            $.ajax({
+                url: "/KeToan/DuyetDonDatXe",
+                type: "POST",
+                dataType: "json",
+                data: { id: id },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#Duyet-DatXe').modal('hide');
+                        location.reload();
+                    }
+                }
+            })
+        })
+
+    })
+    $('.modal-ThanhToan').click(function () {
+        $('#ThanhToan-DatXe').modal('show');
+        $('#hidThanhToanId').val($(this).data('id'));
+        var id = $('#hidThanhToanId').val();
+        $('#thanhToanID').click(function () {
+            $.ajax({
+                url: "/KeToan/XacNhanThanhToan",
+                type: "POST",
+                dataType: "json",
+                data: { id: id },
+                success: function (response) {
+                    if (response.status == true) {
+                        $('#ThanhToan-DatXe').modal('hide');
+                        location.reload();
+                    }
+                }
+            })
+        })
+    })
+    $('.modal-Print').click(function () {
+        $('#hidPrintId').val($(this).data('id'));
+        var id = $('#hidPrintId').val();
+        console.log(id);
+        var tmp = $('#Print-DatXe').data('url');
+        $('#Print-DatXe').data('url', tmp + "/" + id);
+        var url = $('#Print-DatXe').data('url');
+        console.log(url);
+
+        $.get(url, function (data) {
+            $mymodal = $("#Print-DatXe");
+            //update the modal's body with the response received
+            $mymodal.find("div.modal-body").html(data);
+            // Show the modal
+            $mymodal.modal("show");
+        })
+    })
+</script>

@@ -30,7 +30,7 @@ namespace WebThueXe.Models
         [Display(Name = "Tên ngân hàng")]
         [Required(ErrorMessage = "Can not empty")]
         public string tenNganHang { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NguoiDung> NguoiDungs { get; set; }
     }
