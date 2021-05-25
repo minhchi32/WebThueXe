@@ -34,7 +34,7 @@ namespace WebThueXe.Models
         [Display(Name = "Mã loại phạt")]
         [Required(ErrorMessage = "Can not empty")]
         public int maLoaiPhat { get; set; }
-    
+
         public virtual LoaiPhat LoaiPhat { get; set; }
         public virtual PhieuPhat PhieuPhat { get; set; }
         public virtual Xe Xe { get; set; }

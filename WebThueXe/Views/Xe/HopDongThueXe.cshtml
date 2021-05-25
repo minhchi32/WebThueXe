@@ -1,10 +1,18 @@
-﻿
+﻿@using WebThueXe.Models
+
 @{
     ViewBag.Title = "HopDongThueXe";
     Layout = "~/Views/Shared/_LayoutTimKiem.cshtml";
 }
 
-<h5>Hợp đồng thuê xe</h5>
+@{
+    var prod = (HopDong)ViewData["myHopDong"];
+}
+
+@{
+    NguoiDung nguoiDung = (NguoiDung)Session["NguoiDung"];
+}
+
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -14,32 +22,58 @@
                     <div class="col-md-12">
                         <h4 class="text-center">Thông tin hợp đồng</h4>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         Mã hợp đồng:
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
+                        @prod.maHopDong
+                    </div>
+                    <div class="col-md-3">
                         Tên xe:
                     </div>
+                    <div class="col-md-3">
+                        @prod.tenXe
+                    </div>
                     <div class="col-md-12">
                         <hr>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         Ngày nhận:
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
+                        @prod.ngayThue
+                    </div>
+                    <div class="col-md-3">
                         Ngày trả:
+                    </div>
+                    <div class="col-md-3">
+                        @prod.ngayTra
                     </div>
                     <div class="col-md-12">
                         <hr>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         Số ngày:
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
+                        @prod.soNgayThue
+                    </div>
+                    <div class="col-md-3">
                         Giá thuê trong 1 ngày:
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
+                        @prod.donGia
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                    <div class="col-md-3">
                         Tổng tiền thuê xe:
+                    </div>
+                    <div class="col-md-3">
+                        @prod.TongTien
                     </div>
                     <div class="col-md-12">
                         <hr>
@@ -58,29 +92,41 @@
                         <hr>
                     </div>
                     <div class="col-md-12 text-center">
-                        <div>Thanh toán tại văn phòng công ty:<input type="radio" name="" id="1"></div>
-                        <hr>
-                        <div>Thanh toán tại bãi xe khi nhận xe:<input type="radio" name="" id="2"></div>
-                        <hr>
-                        <div>Tự đi chuyển khoản qua ngân hàng:<input type="radio" name="" id="3"></div>
-                        <hr>
-                        <div>Thanh toán trực tuyến bằng thẻ ATM nội địa:<input type="radio" name="" id="4"></div>
-                    </div>
-                    <div class="col-md-12">
-                        <hr>
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-lg btn-primary">
-                            Đặt xe ngay
-                        </button>
+                        <form id="myForm">
+                            <input type="radio" name="radioName" value="1" checked /> Thanh toán tại văn phòng công ty <br />
+                            <input type="radio" name="radioName" value="2" /> Thanh toán tại bãi xe khi nhận xe <br />
+                            <input type="radio" name="radioName" value="3" /> Chuyển khoản ngân hàng <br />
+                        </form>
+                        <div class="col-md-12">
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <h4 style="text-align:center">Thông tin người đặt</h4>
+                            <div class="row">
+                                    <div class="col-md-4" style="text-align:right">Họ tên đầy đủ</div>
+                                    <div class="col-md-8"><input id="hoTenID" class="form-control" type="text" placeholder="Họ tên đầy đủ" style="margin-bottom:5px" required /></div>
+                                    <div class="col-md-4" style="text-align:right">Email</div>
+                                    <div class="col-md-8"><input id="emailID" class="form-control" type="email" placeholder="Địa chỉ email" style="margin-bottom:5px" /></div>
+                                    <div class="col-md-4" style="text-align:right">Số điện thoại</div>
+                                    <div class="col-md-8"><input id="SDTID" class="form-control" type="number" placeholder="Số diện thoại" style="margin-bottom:5px" /></div>
+                                    <div class="col-md-4" style="text-align:right">Địa chỉ nhận xe</div>
+                                    <div class="col-md-8"><input id="diaChiNhanXeID" class="form-control" type="text" placeholder="Địa chỉ nhận xe" style="margin-bottom:5px" required /></div>
+                                    <div class="col-md-12">Yêu cầu thêm của bạn</div>
+                                    <div class="col-md-12"><textarea id="urcmtID" class="form-control" placeholder="Yêu cầu thêm của bạn ..." style="margin-bottom:5px"></textarea></div>
+                                    <div class="col-md-12 text-center">
+                                        @Html.ActionLink("Đặt xe", "DatXe", "Xe", new { maXe = prod.maXe, maNguoiDung = nguoiDung.maNguoiDung, hotenNguoiDatXe = "hoTenNguoiDungID", email = "EmailID", SDT = "SDTID", ghiChu = "ghiChuID", ngayThue = prod.ngayThue, ngayTra = prod.ngayTra, soNgayThue = prod.soNgayThue, diaChiNhanXe = "diaChiNhanXeID", maPhuongThucThanhToan = "maPhuongNhanThanhToanID", tongTien = prod.TongTien }, new { id = "DatXeID", @class = "btn btn-lg btn-primary", })
+                                    </div>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
-            <hr>
         </div>
         <div class="col-md-3">
             <blockquote>
-                "Cám ơn bạn đã đặt <strong>ten xe</strong>. Xin vui lòng điền thông tin chi tiết của bạn bên
+                "Cám ơn bạn đã đặt <strong>@prod.tenXe</strong>. Xin vui lòng điền thông tin chi tiết của bạn bên
                 trái và chúng tôi sẽ liên hệ với bạn qua điện thoại hoặc email trong vòng 24 đến 48 giờ với một mức
                 giá thích hợp và hành trình tốt nhất"
             </blockquote>
@@ -88,3 +134,30 @@
     </div>
 </div>
 
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script>
+    $('#DatXeID').click(function () {
+        document.getElementById("myForm").submit();
+
+
+        $('#DatXeID').attr('href', function () {
+            return this.href.replace('hoTenNguoiDungID', $('#hoTenID').val());
+        });
+        $('#DatXeID').attr('href', function () {
+            return this.href.replace('EmailID', $('#emailID').val());
+        });
+        $('#DatXeID').attr('href', function () {
+            return this.href.replace('SDTID', $('#SDTID').val());
+        });
+        $('#DatXeID').attr('href', function () {
+            return this.href.replace('diaChiNhanXeID', $('#diaChiNhanXeID').val());
+        });
+        $('#DatXeID').attr('href', function () {
+            return this.href.replace('ghiChuID', $('#urcmtID').val());
+        });
+        $('#DatXeID').attr('href', function () {
+            return this.href.replace('maPhuongNhanThanhToanID', $('input[name=radioName]:checked', '#myForm').val());
+        });
+    })
+
+</script>

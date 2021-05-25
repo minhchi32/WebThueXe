@@ -30,7 +30,7 @@ namespace WebThueXe.Models
         [Display(Name = "Tên loại xe")]
         [Required(ErrorMessage = "Can not empty")]
         public string tenLoaiXe { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Xe> Xes { get; set; }
     }

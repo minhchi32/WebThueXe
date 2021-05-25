@@ -35,7 +35,7 @@ namespace WebThueXe.Models
         [Display(Name = "Tiền phạt")]
         [Required(ErrorMessage = "Can not empty")]
         public int tienPhat { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTPhieuPhat> CTPhieuPhats { get; set; }
     }

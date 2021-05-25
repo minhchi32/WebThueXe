@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_LayoutTimKiem.cshtml";
 }
 
-<h5>Tất cả loại xe</h5>
-<div class="container">
-    <div class="row">
+
         @foreach (var item in Model)
         {
             <div class="col-md-12" style="border: 1px solid black" id="@Html.DisplayFor(model=>item.maXe)" onclick="location.href='@Url.Action("ChiTietXe", "Xe", new { id = item.maXe })'">
@@ -50,5 +48,3 @@
             </div>
 
         }
-        </div>
-</div>

@@ -4,27 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f4db6952d5cc45dda284a11db7eac6fd" Name="Diagram1">
-        <EntityTypeShape EntityType="DBCarRentalModel.CTHoaDon" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.CTHopDong" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.CTPhieuPhat" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.HieuXe" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.HoaDon" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.HopDong" Width="1.5" PointX="0.75" PointY="23.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.LoaiPhat" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.LoaiXe" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.NganHang" Width="1.5" PointX="1.5" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.NguoiDung" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.PhieuPhat" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.Quyen" Width="1.5" PointX="1.5" PointY="20.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.SoXe" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.TinhTrangHopDong" Width="1.5" PointX="1.5" PointY="28.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.TinhTrangXe" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBCarRentalModel.Xe" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+      <Diagram DiagramId="ab2311238966485085a2ab37d0b041db" Name="Diagram1">
+        <EntityTypeShape EntityType="DBCarRentalModel.CTHoaDon" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.CTPhieuPhat" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.HieuXe" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.HoaDon" Width="1.5" PointX="10.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.HopDong" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.LoaiPhat" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.LoaiXe" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.NganHang" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.NguoiDung" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.PhieuPhat" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.PhuongThucThanhToan" Width="1.5" PointX="6" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.Quyen" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.SoDatXe" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.SoXe" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.TinhTrangHopDong" Width="1.5" PointX="6" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.TinhTrangXe" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBCarRentalModel.Xe" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
         <AssociationConnector Association="DBCarRentalModel.FK__CTHoaDon__maHoaD__5535A963" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__CTHoaDon__maXe__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="DBCarRentalModel.FK__CTHopDong__maHop__4222D4EF" ManuallyRouted="false" />
-        <AssociationConnector Association="DBCarRentalModel.FK__CTHopDong__maXe__4316F928" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__CTPhieuPh__maLoa__4AB81AF0" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__CTPhieuPh__maPhi__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__CTPhieuPha__maXe__4CA06362" ManuallyRouted="false" />
@@ -32,14 +31,18 @@
         <AssociationConnector Association="DBCarRentalModel.FK__HoaDon__maHopDon__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__HoaDon__maKeToan__5070F446" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__HoaDon__maKhachH__4F7CD00D" ManuallyRouted="false" />
-        <AssociationConnector Association="DBCarRentalModel.FK__HopDong__maTinhT__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="DBCarRentalModel.FK__SoXe__maHopDong__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCarRentalModel.FK__HopDong__maNguoi__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCarRentalModel.FK__HopDong__maPhuon__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCarRentalModel.FK__HopDong__maTinhT__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCarRentalModel.FK__HopDong__maXe__4222D4EF" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__Xe__maLoaiXe__2E1BDC42" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__NguoiDung__maNga__35BCFE0A" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__NguoiDung__maQuy__34C8D9D1" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__PhieuPhat__maNgu__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="DBCarRentalModel.FK__SoXe__maNguoiDun__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="DBCarRentalModel.FK__SoXe__maXe__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCarRentalModel.FK__SoDatXe__maNguoi__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCarRentalModel.FK__SoXe__maNguoiDun__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCarRentalModel.FK__SoDatXe__maXe__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="DBCarRentalModel.FK__SoXe__maXe__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="DBCarRentalModel.FK__Xe__maTinhTrangX__300424B4" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

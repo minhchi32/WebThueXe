@@ -17,9 +17,27 @@ namespace WebThueXe.Controllers
             return View();
         }
         #region Quản lý người dùng
-        public ActionResult QuanLyNguoiDung()
+        public ActionResult QuanLyNguoiDung(string ten,int maQuyen=0)
         {
-            return View(database.NguoiDungs.ToList());
+            List<Quyen> list = database.Quyens.ToList();
+            ViewBag.listQuyen = new SelectList(list, "maQuyen", "tenQuyen");
+            if(ten==null&& maQuyen == 0)
+            {
+                return View(database.NguoiDungs.ToList());
+            }
+            else if (ten != null&&maQuyen==0)
+            {
+                return View(database.NguoiDungs.Where(s => s.ten.Contains(ten)).ToList());
+            }
+            else if (ten == null && maQuyen != 0)
+            {
+                return View(database.NguoiDungs.Where(s => s.maQuyen==maQuyen).ToList());
+            }
+            else
+            {
+                return View(database.NguoiDungs.Where(s => s.maQuyen == maQuyen&&s.ten.Contains(ten)).ToList());
+
+            }
         }
 
         public ActionResult ThemNguoiDung()
@@ -67,7 +85,7 @@ namespace WebThueXe.Controllers
                 ViewBag.DsQuyen = new SelectList(dsQuyen, "maQuyen", "tenQuyen");
                 database.Entry(nguoiDung).State = System.Data.Entity.EntityState.Modified;
                 database.SaveChanges();
-                return RedirectToAction("QuanLyNguoiDung");
+                return RedirectToAction("QuanLyNguoiDung","Admin");
             }
             catch (Exception e)
             {
@@ -161,6 +179,24 @@ namespace WebThueXe.Controllers
             {
                 return Content("This data is using in other table, Error Delete!");
             }
+        }
+        public JsonResult SelectQuyen()
+        {
+            var quyens = database.Quyens.ToList();
+            List<Quyens> listQuyens = new List<Quyens>();
+            Quyens tmp = null;
+            foreach (var item in quyens)
+            {
+                tmp = new Quyens();
+                tmp.maQuyen = item.maQuyen;
+                tmp.tenQuyen = item.tenQuyen;
+                listQuyens.Add(tmp);
+            }
+            return Json(new
+            {
+                data = listQuyens,
+                status = true
+            });
         }
         #endregion
     }

@@ -21,7 +21,9 @@ namespace WebThueXe.Models
         {
             this.HoaDons = new HashSet<HoaDon>();
             this.HoaDons1 = new HashSet<HoaDon>();
+            this.HopDongs = new HashSet<HopDong>();
             this.PhieuPhats = new HashSet<PhieuPhat>();
+            this.SoDatXes = new HashSet<SoDatXe>();
             this.SoXes = new HashSet<SoXe>();
         }
 
@@ -87,12 +89,17 @@ namespace WebThueXe.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HopDong> HopDongs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons1 { get; set; }
         public virtual NganHang NganHang { get; set; }
         public virtual Quyen Quyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuPhat> PhieuPhats { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SoDatXe> SoDatXes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SoXe> SoXes { get; set; }
+
     }
 }
