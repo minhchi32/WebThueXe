@@ -100,6 +100,7 @@
           <Property Name="soTKNganHang" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="maNganHang" Type="int" Nullable="false" />
           <Property Name="CMND" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ngayThamGia" Type="datetime" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="maQuyen" Type="int" Nullable="false" />
@@ -672,6 +673,7 @@
           <Property Name="soTKNganHang" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="maNganHang" Type="Int32" Nullable="false" />
           <Property Name="CMND" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ngayThamGia" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="maQuyen" Type="Int32" Nullable="false" />
@@ -1260,6 +1262,7 @@
                 <ScalarProperty Name="soTKNganHang" ColumnName="soTKNganHang" />
                 <ScalarProperty Name="maNganHang" ColumnName="maNganHang" />
                 <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="ngayThamGia" ColumnName="ngayThamGia" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="maQuyen" ColumnName="maQuyen" />

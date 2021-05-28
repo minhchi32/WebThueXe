@@ -66,6 +66,7 @@ namespace WebThueXe.Models
         [Required(ErrorMessage = "Can not empty")]
         public string CMND { get; set; }
 
+        public System.DateTime ngayThamGia { get; set; }
 
         [Display(Name = "Tên tài khoản")]
         [Required(ErrorMessage = "Can not empty")]
@@ -85,7 +86,7 @@ namespace WebThueXe.Models
 
         [Display(Name = "Mã quyền")]
         public int maQuyen { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -103,3 +104,4 @@ namespace WebThueXe.Models
 
     }
 }
+
