@@ -1,57 +1,57 @@
-﻿
+﻿@model WebThueXe.Models.NguoiDung
+
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "RegisterUser";
     Layout = "~/Views/Shared/_LayoutForm.cshtml";
 }
 
-<section class="container-fluid" style="height:100%">
-    <section class="row justify-content-center">
-        <section class="col-12 col-sm-8 col-md-4 form-container">
-            <h2>Đăng ký</h2>
-            <form>
-                <div class="form-group">
-                    <label>Tên:</label>
-                    <input type="text" class="form-control" id="">
-                </div>
-                <div class="form-group">
-                    <label>SĐT:</label>
-                    <input type="text" class="form-control" id="">
-                </div>
-                <div class="form-group">
-                    <label>Số tài khoản ngân hàng:</label>
-                    <input type="text" class="form-control" id="">
-                </div>
-                <div class="form-group">
-                    <label>Tên ngân hàng:</label>
-                    <select type="text" class="form-control" id="" name="loaiXe" required="">
-                        <option>Tất cả loại xe</option>
-                        <option value="1">1</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>CMND:</label>
-                    <input type="text" class="form-control" id="">
-                </div>
-                <div class="form-group">
-                    <label>Tài khoản:</label>
-                    <input type="text" class="form-control" id="">
-                </div>
-                <div class="form-group">
-                    <label>Mật khẩu:</label>
-                    <input type="password" class="form-control" id="">
-                </div>
-                <div class="form-group">
-                    <label>Nhập lại mật khẩu:</label>
-                    <input type="password" class="form-control" id="">
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "User")'">Đăng ký</button>
-            </form>
-        </section>
-    </section>
-</section>
 
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+@using (Html.BeginForm("Register", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+    <h2 style="text-align:center">Đăng ký</h2>
+    <div class="form-group">
+        <b>@Html.LabelFor(model => model.username)</b>
+        @Html.TextBoxFor(model => model.username, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập username" })
+        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+    </div>
+    if (ViewBag.ErrorRegister != null)
+    {
+        <p>@ViewBag.ErrorRegister</p>
+    }
+    <div class="form-group">
+        <b>@Html.LabelFor(model => model.password)</b>
+        @Html.PasswordFor(model => model.password, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập password" })
+        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <b>@Html.LabelFor(model => model.ConfirmPass)</b>
+        @Html.PasswordFor(model => model.ConfirmPass, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập lại password" })
+        @Html.ValidationMessageFor(model => model.ConfirmPass, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <b>@Html.LabelFor(model => model.soTKNganHang)</b>
+        @Html.TextBoxFor(model => model.soTKNganHang, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập số tài khoản ngân hàng" })
+        @Html.ValidationMessageFor(model => model.soTKNganHang, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <b>@Html.LabelFor(model => model.NganHang.tenNganHang)</b>
+        @Html.DropDownListFor(model => model.maNganHang, ViewBag.DsNganHang as SelectList, "-- chọn loại ngân hàng --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.NganHang.tenNganHang, "", new { @class = "text-danger" })
+    </div>
+    if (ViewBag.nganHang != null)
+    {
+        <p>@ViewBag.nganHang</p>
+    }
+    @Html.HiddenFor(model => model.maNguoiDung)
+    <button type="submit" value="Register" class="btn btn-primary btn-block" style="padding: 10px;"><b>Đăng ký</b></button>
+    <hr>
+    <div class="form-group">
+        <p style="float: left;">Đã có tài khoản? <a href="@Url.Action("Login", "User")" class="card-link">Đăng nhập ngay</a></p>
+    </div>
+    <br>
+
+}

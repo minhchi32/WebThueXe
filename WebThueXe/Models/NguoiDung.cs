@@ -34,13 +34,12 @@ namespace WebThueXe.Models
         public int maNguoiDung { get; set; }
 
 
-        [Display(Name = "Tên")]
+        [Display(Name = "Họ tên")]
         [Required(ErrorMessage = "Can not empty")]
         public string ten { get; set; }
 
 
-        [Display(Name = "SĐt")]
-        [Required(ErrorMessage = "Can not empty")]
+        [Display(Name = "SĐT")]
         public string SDT { get; set; }
 
 
@@ -58,12 +57,10 @@ namespace WebThueXe.Models
 
 
         [Display(Name = "Mã ngân hàng")]
-        [Required(ErrorMessage = "Can not empty")]
         public int maNganHang { get; set; }
 
 
         [Display(Name = "CMND")]
-        [Required(ErrorMessage = "Can not empty")]
         public string CMND { get; set; }
 
         public System.DateTime ngayThamGia { get; set; }
@@ -80,6 +77,7 @@ namespace WebThueXe.Models
 
         [NotMapped]
         [Compare("password")]
+        [DataType(DataType.Password)]
         [Display(Name = "Nhập lại mật khẩu")]
         public string ConfirmPass { get; set; }
 

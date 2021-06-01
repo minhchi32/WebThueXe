@@ -7,35 +7,27 @@
 @using (Html.BeginForm("Login", "User"))
 {
     @Html.AntiForgeryToken()
-    <section class="container-fluid" style="height:100%">
-        <section class="row justify-content-center">
-            <section class="col-12 col-sm-8 col-md-4 form-container form-login">
-                <h2 style="text-align:center">Đăng nhập</h2>
-                <form class="form-container">
-                    <div class="form-group">
-                        <b>Tài khoản</b>
-                        @Html.TextBoxFor(model => model.username, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập tài khoản" })
-                        @Html.ValidationMessageFor(model => model.username)
+    <h2 style="text-align:center">Đăng nhập</h2>
+    <div class="form-group">
+        <b>Tài khoản</b>
+        @Html.TextBoxFor(model => model.username, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập tài khoản" })
+        @Html.ValidationMessageFor(model => model.username)
 
-                    </div>
-                    <div class="form-group">
-                        <b>Mật khẩu</b>
-                        @Html.TextBoxFor(model => model.password, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập mật khẩu", @type = "password" })
-                        @Html.ValidationMessageFor(model => model.password)
-                        @if (ViewBag.ErrorInfo == null)
-                        {
-                            <p>@ViewBag.ErrorInfo</p>
-                        }
-                    </div>
-                    <button type="submit" value="Login" class="btn btn-primary btn-block" style="padding: 10px;"><b>Đăng nhập</b></button>
-                    <hr>
-                    <div class="form-group">
-                        <p style="float: left;">Bạn chưa có tài khoản? <a href="@Url.Action("Register", "User")" class="card-link">Đăng ký ngay</a></p>
-                    </div>
-                    <br>
-                </form>
-            </section>
-        </section>
-    </section>
+    </div>
+    <div class="form-group">
+        <b>Mật khẩu</b>
+        @Html.TextBoxFor(model => model.password, new { @class = "form-control", style = "field-validation-error", @placeholder = "Nhập mật khẩu", @type = "password" })
+        @Html.ValidationMessageFor(model => model.password)
+        @if (ViewBag.ErrorInfo == null)
+        {
+            <p>@ViewBag.ErrorInfo</p>
+        }
+    </div>
+    <button type="submit" value="Login" class="btn btn-primary btn-block" style="padding: 10px;"><b>Đăng nhập</b></button>
+    <hr>
+    <div class="form-group">
+        <p style="float: left;">Bạn chưa có tài khoản? <a href="@Url.Action("Register", "User")" class="card-link">Đăng ký ngay</a></p>
+    </div>
+    <br>
 
 }

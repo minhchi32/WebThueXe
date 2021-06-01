@@ -65,26 +65,40 @@ namespace WebThueXe.Controllers
         }
         public ActionResult Register()
         {
+            var dsNganHang = database.NganHangs.ToList();
+            ViewBag.DsNganHang = new SelectList(dsNganHang, "maNganHang", "tenNganHang");
             return View();
         }
         [HttpPost]
-        public ActionResult RegisterUser(NguoiDung _user)
+        public ActionResult Register(NguoiDung _user)
         {
+            var dsNganHang = database.NganHangs.ToList();
+            ViewBag.DsNganHang= new SelectList(dsNganHang, "maNganHang", "tenNganHang");
+            _user.maQuyen = 2;
+            _user.ngayThamGia = DateTime.Now;
+            _user.ten = "";
+            _user.SDT = "";
+            _user.diaChi = "";
+            _user.hoKhau = "";
+            _user.CMND = "";
+            var check_ID = database.NguoiDungs.Where(s => s.username == _user.username).FirstOrDefault();
+            if (_user.maNganHang == 0)
+            {
+                ViewBag.nganHang = "Chọn loại ngân hàng";
+                return View();
+            }
+            if (check_ID != null)
+            {
+                ViewBag.ErrorRegister = "This nameuser is exist";
+                return View();
+            }
             if (ModelState.IsValid)
             {
-                var check_ID = database.NguoiDungs.Where(s => s.username == _user.username).FirstOrDefault();
-                if (check_ID == null)
-                {
-                    database.Configuration.ValidateOnSaveEnabled = false;
-                    database.NguoiDungs.Add(_user);
-                    database.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ViewBag.ErrorRegister = "This nameuser is exist";
-                    return View();
-                }
+                database.Configuration.ValidateOnSaveEnabled = false;
+                database.NguoiDungs.Add(_user);
+                database.SaveChanges();
+                return RedirectToAction("Index", "User");
+                
             }
             return View();
         }
