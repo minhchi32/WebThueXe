@@ -1,6 +1,7 @@
-﻿@model IEnumerable<WebThueXe.Models.NguoiDung>
-@using WebThueXe.Models
-
+﻿@*@model IEnumerable<WebThueXe.Models.NguoiDung>*@
+@using WebThueXe.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<NguoiDung>
 @{
     ViewBag.Title = "QuanLyNguoiDung";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -21,7 +22,7 @@
             @Html.DropDownList("maQuyen", new SelectList(new string[] { }), new { @class = "form-control", @id = "maQuyen", name = "maQuyen" })
         </div>
         <div class="col-auto my-1">
-            @Html.ActionLink("Tìm kiếm", "QuanLyNguoiDung", "Admin", new { ten = "tenval", maQuyen = "maQuyenval"}, new { id = "TimKiemId", @class = "btn btn-primary text-center" })
+            @Html.ActionLink("Tìm kiếm", "QuanLyNguoiDung", "Admin", new { ten = "tenval", maQuyen = "maQuyenval" }, new { id = "TimKiemId", @class = "btn btn-primary text-center" })
         </div>
     </div>
 </form>
@@ -33,12 +34,12 @@
 
         <thead>
             <tr>
-                <th scope="col">@Html.DisplayNameFor(model => model.maNguoiDung)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.ten)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.SDT)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.diaChi)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.NganHang.tenNganHang)</th>
-                <th scope="col">@Html.DisplayNameFor(model => model.Quyen.tenQuyen)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().maNguoiDung)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().ten)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().SDT)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().diaChi)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().NganHang.tenNganHang)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().Quyen.tenQuyen)</th>
             </tr>
         </thead>
         <tbody>
@@ -63,6 +64,7 @@
         </tbody>
     </table>
 </div>
+
 <script src="~/Scripts/jquery-3.6.0.js"></script>
 <script>
     $.ajax({
@@ -90,3 +92,8 @@
     })
 
 </script>
+
+Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuPage">
+    @Html.PagedListPager(Model, page => Url.Action("QuanLyNguoiDung", new { page = page }))
+</div>

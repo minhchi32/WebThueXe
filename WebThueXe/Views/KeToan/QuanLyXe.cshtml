@@ -1,5 +1,7 @@
-﻿@model IEnumerable<WebThueXe.Models.Xe>
-
+﻿@*@model IEnumerable<WebThueXe.Models.Xe>*@
+@using WebThueXe.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Xe>
 @{
     ViewBag.Title = "QuanLyXe";
     Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
@@ -41,13 +43,13 @@
                                         <p>@Html.DisplayFor(model => item.moTaXe)</p>
                                     </div>
                                     <div class="col-md-4">
-                                        @Html.ActionLink("Edit", "SuaThongTinXe", new { id = item.maXe }) 
+                                        @Html.ActionLink("Edit", "SuaThongTinXe", new { id = item.maXe })
                                     </div>
                                     <div class="col-md-4">
-                                        @Html.ActionLink("Detail", "ChiTietThongTinXe", new { id = item.maXe }) 
+                                        @Html.ActionLink("Detail", "ChiTietThongTinXe", new { id = item.maXe })
                                     </div>
                                     <div class="col-md-4">
-                                        @Html.ActionLink("Delete", "XoaXe", new { id = item.maXe }) 
+                                        @Html.ActionLink("Delete", "XoaXe", new { id = item.maXe })
                                     </div>
                                 </div>
                             </div>
@@ -65,3 +67,7 @@
     </div>
 </div>
 
+Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuPage">
+    @Html.PagedListPager(Model, page => Url.Action("QuanLyXe", new { page = page }))
+</div>

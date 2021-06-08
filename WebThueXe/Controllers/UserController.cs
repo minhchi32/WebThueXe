@@ -76,7 +76,6 @@ namespace WebThueXe.Controllers
             ViewBag.DsNganHang= new SelectList(dsNganHang, "maNganHang", "tenNganHang");
             _user.maQuyen = 2;
             _user.ngayThamGia = DateTime.Now;
-            _user.ten = "";
             _user.SDT = "";
             _user.diaChi = "";
             _user.hoKhau = "";
@@ -94,10 +93,19 @@ namespace WebThueXe.Controllers
             }
             if (ModelState.IsValid)
             {
-                database.Configuration.ValidateOnSaveEnabled = false;
-                database.NguoiDungs.Add(_user);
-                database.SaveChanges();
-                return RedirectToAction("Index", "User");
+                try
+                {
+                    database.Configuration.ValidateOnSaveEnabled = false;
+                    database.NguoiDungs.Add(_user);
+                    database.SaveChanges();
+                    return RedirectToAction("Index", "User");
+                }
+                catch (Exception e)
+                {
+                    ViewBag.ErrorRegister = e.ToString();
+                    return View();
+                }
+                
                 
             }
             return View();

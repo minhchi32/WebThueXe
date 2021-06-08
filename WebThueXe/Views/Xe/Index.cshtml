@@ -1,50 +1,57 @@
-﻿@model IEnumerable<WebThueXe.Models.Xe>
-
+﻿@*@model IEnumerable<WebThueXe.Models.Xe>*@
+@using WebThueXe.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Xe>
 @{
     ViewBag.Title = "Tất cả loại xe";
     Layout = "~/Views/Shared/_LayoutTimKiem.cshtml";
 }
 
 
-        @foreach (var item in Model)
-        {
-            <div class="col-md-12" style="border: 1px solid black" id="@Html.DisplayFor(model=>item.maXe)" onclick="location.href='@Url.Action("ChiTietXe", "Xe", new { id = item.maXe })'">
-                <br />
-                <div class="container">
-                    <div class="row">
-                        <img class="float-left col-md-4 col-sm-12"
-                             src="@Url.Content(item.hinh)"
-                             alt="" />
-                        <div class="clearfix"></div>
-                        <div class="col-md-8">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h5>@Html.DisplayFor(model => item.tenXe)</h5>
-                                        <hr />
-                                        <h6>@Html.DisplayFor(model => item.giaThueXe)</h6>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>@Html.DisplayFor(model => item.bienSo)</p>
-                                        <p>@Html.DisplayFor(model => item.TinhTrangXe.tenTinhTrangXe)</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>@Html.DisplayFor(model => item.LoaiXe.tenLoaiXe)</p>
-                                        <p>@Html.DisplayFor(model => item.HieuXe.tenHieuXe)</p>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <p>@Html.DisplayFor(model => item.moTaXe)</p>
-                                    </div>
-                                </div>
+@foreach (var item in Model)
+{
+    <div class="col-md-12" style="border: 1px solid black" id="@Html.DisplayFor(model=>item.maXe)" onclick="location.href='@Url.Action("ChiTietXe", "Xe", new { id = item.maXe })'">
+        <br />
+        <div class="container">
+            <div class="row">
+                <img class="float-left col-md-4 col-sm-12"
+                     src="@Url.Content(item.hinh)"
+                     alt="" />
+                <div class="clearfix"></div>
+                <div class="col-md-8">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5>@Html.DisplayFor(model => item.tenXe)</h5>
+                                <hr />
+                                <h6>@Html.DisplayFor(model => item.giaThueXe)</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.DisplayFor(model => item.bienSo)</p>
+                                <p>@Html.DisplayFor(model => item.TinhTrangXe.tenTinhTrangXe)</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>@Html.DisplayFor(model => item.LoaiXe.tenLoaiXe)</p>
+                                <p>@Html.DisplayFor(model => item.HieuXe.tenHieuXe)</p>
+                            </div>
+                            <div class="col-md-12">
+                                <p>@Html.DisplayFor(model => item.moTaXe)</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <br />
-
             </div>
-            <div class="col-md-12">
-                <br />
-            </div>
+        </div>
+        <br />
 
-        }
+    </div>
+    <div class="col-md-12">
+        <br />
+    </div>
+
+}
+
+Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuPage">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>

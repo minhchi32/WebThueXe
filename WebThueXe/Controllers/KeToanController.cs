@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using WebThueXe.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace WebThueXe.Controllers
 {
@@ -18,9 +20,12 @@ namespace WebThueXe.Controllers
             return View();
         }
         #region Quản lý xe
-        public ActionResult QuanLyXe()
+        public ActionResult QuanLyXe(int? page)
         {
-            return View(database.Xes.ToList());
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+            var result = database.Xes.ToList();
+            return View(result.ToPagedList(pageNum, pageSize));
         }
 
         public ActionResult ChiTietThongTinXe(int id)

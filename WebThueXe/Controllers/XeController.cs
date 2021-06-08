@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using WebThueXe.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace WebThueXe.Controllers
 {
@@ -13,21 +15,16 @@ namespace WebThueXe.Controllers
     {
         DBCarRentalEntities database = new DBCarRentalEntities();
         // GET: Xe
-        public ActionResult Index(double max=int.MaxValue,double min=int.MinValue,int loaiXe=0, int hieuXe=0)
+        public ActionResult Index(int? page, double max = int.MaxValue, double min = int.MinValue, int loaiXe = 0, int hieuXe = 0)
         {
-            if (loaiXe == 0 && hieuXe == 0)
-            {
-                return View(database.Xes.Where(s => s.maTinhTrangXe == 1 && (double)s.giaThueXe <= max && (double)s.giaThueXe >= min).ToList());
-            }
-            else if(loaiXe !=0&&hieuXe==0)
-            {
-                return View(database.Xes.Where(s => s.maTinhTrangXe == 1 && (double)s.giaThueXe <= max && (double)s.giaThueXe >= min && s.maLoaiXe == loaiXe).ToList());
-            }
-            else if (loaiXe == 0 && hieuXe != 0)
-            {
-                return View(database.Xes.Where(s => s.maTinhTrangXe == 1 && (double)s.giaThueXe <= max && (double)s.giaThueXe >= min && s.maHieuXe == hieuXe).ToList());
-            }
-            return View(database.Xes.Where(s => s.maTinhTrangXe == 1 && (double)s.giaThueXe <= max && (double)s.giaThueXe >= min && s.maHieuXe == hieuXe && s.maLoaiXe == loaiXe).ToList());
+            int pageSize = 5;
+            int pageNum = (page ?? 1);
+            var result = database.Xes.Where(s => s.maTinhTrangXe == 1 && (double)s.giaThueXe <= max && (double)s.giaThueXe >= min).ToList();
+            if (loaiXe != 0)
+                result = result.Where(s => s.maLoaiXe == loaiXe).ToList();
+            if (hieuXe != 0)
+                result = result.Where(s => s.maHieuXe == hieuXe).ToList();
+            return View(result.ToPagedList(pageNum, pageSize));
         }
         public ActionResult ChiTietXe(int id)
         {
@@ -58,24 +55,24 @@ namespace WebThueXe.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult HopDongThueXe(int maXe,string tenXe, DateTime ngayThue, DateTime ngayTra,int soNgayThue, int tongTien,int donGia)
+        public ActionResult HopDongThueXe(int maXe, string tenXe, DateTime ngayThue, DateTime ngayTra, int soNgayThue, int tongTien, int donGia)
         {
             int count = database.HopDongs.Count();
-            if (Session["NguoiDung"]!=null)
+            if (Session["NguoiDung"] != null)
             {
                 HopDong hopDong = new HopDong
                 {
                     tenXe = tenXe,
-                    maHopDong=count+1,
+                    maHopDong = count + 1,
                     maXe = maXe,
                     soNgayThue = soNgayThue,
                     ngayLapHopDong = DateTime.Now,
                     ngayThue = ngayThue,
                     ngayTra = ngayTra,
                     TongTien = tongTien,
-                    donGia=donGia,
+                    donGia = donGia,
                 };
-                
+
                 ViewData["myHopDong"] = hopDong;
                 return View();
             }
@@ -111,7 +108,7 @@ namespace WebThueXe.Controllers
             var xe = database.Xes.Find(maXe);
             xe.maTinhTrangXe = 2;
             database.SaveChanges();
-            return View(database.PhuongThucThanhToans.Where(s=>s.maPhuongThucThanhToan==maPhuongThucThanhToan).FirstOrDefault());
+            return View(database.PhuongThucThanhToans.Where(s => s.maPhuongThucThanhToan == maPhuongThucThanhToan).FirstOrDefault());
         }
         public ActionResult Search()
         {

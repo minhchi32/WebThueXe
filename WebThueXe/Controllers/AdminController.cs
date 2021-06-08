@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebThueXe.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace WebThueXe.Controllers
 {
@@ -17,27 +19,18 @@ namespace WebThueXe.Controllers
             return View();
         }
         #region Quản lý người dùng
-        public ActionResult QuanLyNguoiDung(string ten,int maQuyen=0)
+        public ActionResult QuanLyNguoiDung(int? page, string ten, int maQuyen = 0)
         {
             List<Quyen> list = database.Quyens.ToList();
             ViewBag.listQuyen = new SelectList(list, "maQuyen", "tenQuyen");
-            if(ten==null&& maQuyen == 0)
-            {
-                return View(database.NguoiDungs.ToList());
-            }
-            else if (ten != null&&maQuyen==0)
-            {
-                return View(database.NguoiDungs.Where(s => s.ten.Contains(ten)).ToList());
-            }
-            else if (ten == null && maQuyen != 0)
-            {
-                return View(database.NguoiDungs.Where(s => s.maQuyen==maQuyen).ToList());
-            }
-            else
-            {
-                return View(database.NguoiDungs.Where(s => s.maQuyen == maQuyen&&s.ten.Contains(ten)).ToList());
-
-            }
+            int pageSize = 20;
+            int pageNum = (page ?? 1);
+            var result = database.NguoiDungs.ToList();
+            if (ten != null)
+                result = result.Where(s => s.ten.Contains(ten)).ToList();
+            if (maQuyen != 0)
+                result = result.Where(s => s.maQuyen == maQuyen).ToList();
+            return View(result.ToPagedList(pageNum, pageSize));
         }
 
         public ActionResult ThemNguoiDung()
@@ -85,7 +78,7 @@ namespace WebThueXe.Controllers
                 ViewBag.DsQuyen = new SelectList(dsQuyen, "maQuyen", "tenQuyen");
                 database.Entry(nguoiDung).State = System.Data.Entity.EntityState.Modified;
                 database.SaveChanges();
-                return RedirectToAction("QuanLyNguoiDung","Admin");
+                return RedirectToAction("QuanLyNguoiDung", "Admin");
             }
             catch (Exception e)
             {
