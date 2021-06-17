@@ -1,0 +1,120 @@
+﻿@*@model IEnumerable<WebThueXe.Models.Xe>*@
+@using WebThueXe.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<Xe>
+@{
+    ViewBag.Title = "BaoCaoXe";
+    Layout = "~/Views/Shared/_LayoutGiamDoc.cshtml";
+}
+<style>
+    .sort-icon {
+        cursor: pointer;
+    }
+</style>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    var month = (int)ViewData["month"];
+    var year = (int)ViewData["year"];
+}
+
+<div class="container-fluid">
+    <h4 style="text-align:center">Xem báo cáo</h4>
+    <div class="d-sm-flex justify-content-between">
+        <div class="form-group p-2 flex-fill bd-highlight">
+            <label for="staticEmail" class="col-sm-5 col-form-label">Tháng báo cáo:</label>
+            <div class="col-sm-5">
+                @Html.DropDownList("monthId", new SelectList(new string[] { }), new { @class = "form-control", @id = "monthId", name = "monthId" })
+            </div>
+        </div>
+        <div class="form-group flex-fill bd-highlight">
+            <label for="staticEmail" class="col-sm-5 col-form-label">Năm báo cáo:</label>
+            <div class="col-sm-5">
+                @Html.DropDownList("yearId", new SelectList(new string[] { }), new { @class = "form-control", @id = "yearId", name = "yearId" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group" style="text-align:right; margin-right:100px">
+        @Html.ActionLink("Xem", "BaoCaoXe", "GiamDoc", new { month = "monthId", year = "yearId" }, new { id = "XemId", @class = "btn btn-primary text-center" })
+    </div>
+    <div class="container-fluid">
+        <h2>BÁO CÁO XE</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Tên xe
+                </th>
+                <th>
+                    Biển số
+                </th>
+                <th>
+                    Loại xe
+                </th>
+                <th>
+                    Hiệu Xe
+                </th>
+                <th>
+                    Số lượt thuê <b class="sort-icon" onclick="document.location.href = '@Url.Action("BaoCaoXe","GiamDoc", new { sortOrder = ViewBag.Sort})'">&#8645</b>
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span style="font-weight:bold" data-id="@item.maXe">@Html.DisplayFor(modelItem => item.maXe)</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tenXe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.bienSo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.LoaiXe.tenLoaiXe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.HieuXe.tenHieuXe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.count)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script>
+
+    var html, html1, html2;
+    for (var k = 1; k <= 12; k++) {
+        html += '<option value="' + k + '">' + k + '</option>"'
+    }
+    $('#monthId').html(html);
+    $('#monthId').val(@month);
+
+    var d = new Date();
+    var n = d.getFullYear();
+    for (var j = n - 10; j <= n + 10; j++) {
+        html1 += '<option value="' + j + '">' + j + '</option>"'
+    }
+    $('#yearId').html(html1);
+    $('#yearId').val(@year);
+
+    $('#XemId').click(function () {
+        $('#XemId').attr('href', function () {
+            return this.href.replace('monthId', $('#monthId').val());
+        });
+        $('#XemId').attr('href', function () {
+            return this.href.replace('yearId', $('#yearId').val());
+        });
+    })
+
+</script>
+Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuPage">
+    @Html.PagedListPager(Model, page => Url.Action("BaoCaoXe", new { page = page }))
+</div>

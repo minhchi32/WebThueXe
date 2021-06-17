@@ -1,0 +1,61 @@
+﻿@model WebThueXe.Models.NguoiDung
+
+@{
+    ViewBag.Title = "ChiTietThongTinNguoiDung";
+    Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
+}
+
+<h2>ChiTietThongTinNguoiDung</h2>
+<div class="container">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.maNguoiDung)</th>
+                <td>@Html.DisplayFor(model => model.maNguoiDung)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.ten)</th>
+                <td>@Html.DisplayFor(model => model.ten)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.SDT)</th>
+                <td>@Html.DisplayFor(model => model.SDT)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.diaChi)</th>
+                <td>@Html.DisplayFor(model => model.diaChi)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.hoKhau)</th>
+                <td>@Html.DisplayFor(model => model.hoKhau)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.NganHang.tenNganHang)</th>
+                <td>@Html.DisplayFor(model => model.NganHang.tenNganHang)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.soTKNganHang)</th>
+                <td>@Html.DisplayFor(model => model.soTKNganHang)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.CMND)</th>
+                <td>@Html.DisplayFor(model => model.CMND)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.username)</th>
+                <td>@Html.DisplayFor(model => model.username)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Quyen.tenQuyen)</th>
+                <td>@Html.DisplayFor(model => model.Quyen.tenQuyen)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "SuaThongTinNguoiDung", new { id = Model.maNguoiDung }) |
+    @Html.ActionLink("Back to List", "QuanLyNguoiDung")
+</p>
+
+

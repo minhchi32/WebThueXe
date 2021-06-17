@@ -20,7 +20,7 @@
             Trạng thái thanh toán
         </th>
         <th>
-            Trạng thái đơn đặt xe
+            Trạng thái hợp đồng
         </th>
         <th>
             Thông tin hợp đồng
@@ -51,13 +51,13 @@
                 }
             </td>
             <td>
-                @if (item.daDuyet)
+                @if (item.maTinhTrangHopDong==1)
                 {
-                    <p style="font-weight:bold;color:blue">Đã duyệt</p>
+                    <p style="font-weight:bold;color:blue">Đã ký kết</p>
                 }
-                else
+                else if(item.maTinhTrangHopDong==2)
                 {
-                    <p style="font-weight:bold;color:red">Chưa duyệt</p>
+                    <p style="font-weight:bold;color:red">Chưa ký kết</p>
 
                 }
             </td>
@@ -68,11 +68,12 @@
                 <p style="font-weight:bold;color:red;">Tổng tiền: @Html.DisplayFor(model => item.TongTien)</p>
             </td>
             <td>
-                <a href="" data-toggle="modal" class="modal-Del" data-id="@item.maHopDong">Xóa</a><br />
                 <a href="" data-toggle="modal" class="modal-Print" data-id="@item.maHopDong">Xem hợp đồng</a><br />
-                @if (item.daDuyet == false)
+                <a href="" data-toggle="modal" class="modal-Del" data-id="@item.maHopDong">Xóa</a><br />
+                <a href="" data-toggle="modal" class="modal-Bill" data-id="@item.maHopDong">Lập hóa đơn</a><br />
+                @if (item.maTinhTrangHopDong == 2)
                 {
-                    <a href="" data-toggle="modal" class="modal-Duyet" data-id="@item.maHopDong">Duyệt đơn đặt xe</a><br />
+                    <a href="" data-toggle="modal" class="modal-Duyet" data-id="@item.maHopDong">Xác nhận hợp đồng đã được ký kết</a><br />
                 }
                 @if (item.daThanhToan == false)
                 {
@@ -112,14 +113,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Duyệt đơn đặt xe</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận hợp đồng đã được ký kết?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="hidDuyetId" value="0" />
-                Duyệt đơn đặt xe
+                Xác nhận hợp đồng đã được ký kết?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
@@ -165,6 +166,20 @@
     </div>
 </div>
 
+<div class="modal fade" id="Bill-DatXe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-url="@Url.Action("ChiTietHoaDon","KeToan")">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <input type="hidden" id="hidBillId" value="0" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">In Hóa Đơn</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="~/Scripts/jquery-3.6.0.js"></script>
 <script>
     $('.modal-Del').click(function () {
@@ -185,7 +200,7 @@
                 }
             })
         })
-        
+
     })
     $('.modal-Duyet').click(function () {
         $('#Duyet-DatXe').modal('show');
@@ -193,7 +208,7 @@
         var id = $('#hidDuyetId').val();
         $('#DuyetDonDatXe').click(function () {
             $.ajax({
-                url: "/KeToan/DuyetDonDatXe",
+                url: "/KeToan/DuyetHopDong",
                 type: "POST",
                 dataType: "json",
                 data: { id: id },
@@ -237,6 +252,23 @@
 
         $.get(url, function (data) {
             $mymodal = $("#Print-DatXe");
+            //update the modal's body with the response received
+            $mymodal.find("div.modal-body").html(data);
+            // Show the modal
+            $mymodal.modal("show");
+        })
+    })
+    $('.modal-Bill').click(function () {
+        $('#hidBillId').val($(this).data('id'));
+        var id = $('#hidBillId').val();
+        console.log(id);
+        var tmp = $('#Bill-DatXe').data('url');
+        $('#Bill-DatXe').data('url', tmp + "/" + id);
+        var url = $('#Bill-DatXe').data('url');
+        console.log(url);
+
+        $.get(url, function (data) {
+            $mymodal = $("#Bill-DatXe");
             //update the modal's body with the response received
             $mymodal.find("div.modal-body").html(data);
             // Show the modal

@@ -212,7 +212,8 @@
         <div class="col-md-6">
             <p class="text-right" id="thanhTien"></p>
         </div>
-        @Html.ActionLink("Tiếp tục", "HopDongThueXe", "Xe", new { maXe = Model.maXe, tenXe = Model.tenXe, ngayThue = "ngayThueID", ngayTra = "ngayTraID", soNgayThue = "soNgayThueID", tongTien = "tongTienID", donGia = "donGiaID" }, new { id = "DatXe", @class = "btn btn-lg btn-primary" })
+
+        @Html.ActionLink("Tiếp tục", "HopDongThueXe", "Xe", new { maXe = Model.maXe, tenXe = Model.tenXe, ngayThue = "ngayThueID", ngayTra = "ngayTraID", soNgayThue = "soNgayThueID", tongTien = "tongTienID", donGia = "donGiaID", returnUrl = Context.Request.Url }, new { id = "DatXe", @class = "btn btn-lg btn-primary" })
     </div>
 </div>
 <script src="~/Scripts/jquery-3.6.0.js"></script>

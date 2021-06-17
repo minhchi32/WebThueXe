@@ -3,8 +3,11 @@
     ViewBag.Title = "Đăng nhập";
     Layout = "~/Views/Shared/_LayoutForm.cshtml";
 }
+@{
+    var returnUrl = (string)ViewData["returnUrl"];
+}
 <link href="~/Content/Site.css" rel="stylesheet" />
-@using (Html.BeginForm("Login", "User"))
+@using (Html.BeginForm("Login", "User", new { @returnUrl = returnUrl }))
 {
     @Html.AntiForgeryToken()
     <h2 style="text-align:center">Đăng nhập</h2>

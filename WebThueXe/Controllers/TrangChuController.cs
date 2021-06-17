@@ -13,5 +13,9 @@ namespace WebThueXe.Controllers
         {
             return View();
         }
+        public ActionResult LienHe()
+        {
+            return View();
+        }
     }
 }

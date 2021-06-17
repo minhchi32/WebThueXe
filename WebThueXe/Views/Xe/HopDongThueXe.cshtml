@@ -13,6 +13,15 @@
     NguoiDung nguoiDung = (NguoiDung)Session["NguoiDung"];
 }
 
+<style>
+
+    label.error {
+        display: inline-block;
+        color: red;
+        width: 200px;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -103,19 +112,38 @@
                         <div class="col-md-12">
                             <h4 style="text-align:center">Thông tin người đặt</h4>
                             <div class="row">
-                                    <div class="col-md-4" style="text-align:right">Họ tên đầy đủ</div>
-                                    <div class="col-md-8"><input id="hoTenID" class="form-control" type="text" placeholder="Họ tên đầy đủ" style="margin-bottom:5px" required /></div>
-                                    <div class="col-md-4" style="text-align:right">Email</div>
-                                    <div class="col-md-8"><input id="emailID" class="form-control" type="email" placeholder="Địa chỉ email" style="margin-bottom:5px" /></div>
-                                    <div class="col-md-4" style="text-align:right">Số điện thoại</div>
-                                    <div class="col-md-8"><input id="SDTID" class="form-control" type="number" placeholder="Số diện thoại" style="margin-bottom:5px" /></div>
-                                    <div class="col-md-4" style="text-align:right">Địa chỉ nhận xe</div>
-                                    <div class="col-md-8"><input id="diaChiNhanXeID" class="form-control" type="text" placeholder="Địa chỉ nhận xe" style="margin-bottom:5px" required /></div>
-                                    <div class="col-md-12">Yêu cầu thêm của bạn</div>
-                                    <div class="col-md-12"><textarea id="urcmtID" class="form-control" placeholder="Yêu cầu thêm của bạn ..." style="margin-bottom:5px"></textarea></div>
-                                    <div class="col-md-12 text-center">
-                                        @Html.ActionLink("Đặt xe", "DatXe", "Xe", new { maXe = prod.maXe, maNguoiDung = nguoiDung.maNguoiDung, hotenNguoiDatXe = "hoTenNguoiDungID", email = "EmailID", SDT = "SDTID", ghiChu = "ghiChuID", ngayThue = prod.ngayThue, ngayTra = prod.ngayTra, soNgayThue = prod.soNgayThue, diaChiNhanXe = "diaChiNhanXeID", maPhuongThucThanhToan = "maPhuongNhanThanhToanID", tongTien = prod.TongTien }, new { id = "DatXeID", @class = "btn btn-lg btn-primary", })
+                                <form id="form1" name="form1" style="width:100%">
+                                    <div class="form-group row">
+                                        <label for="hoten" class="col-sm-4 col-form-label">Họ tên đầy đủ</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="hoTenID" class="form-control" id="hoTenID" placeholder="Họ tên đầy đủ" required>
+                                        </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+                                        <div class="col-sm-8">
+                                            <input type="email" name="emailID" class="form-control" id="emailID" placeholder="Địa chỉ email" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="sdt" class="col-sm-4 col-form-label">Số điện thoại</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="SDTID" class="form-control" id="SDTID" placeholder="Số diện thoại" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="DiaChiNhanXe" class="col-sm-4 col-form-label">Địa chỉ nhận xe</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="diaChiNhanXeID" class="form-control" id="diaChiNhanXeID" placeholder="Địa chỉ nhận xe" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cmt">Yêu cầu thêm của bạn: </label>
+                                        <textarea type="text" class="form-control" id="ghiChuID" placeholder="Example input placeholder"></textarea>
+                                    </div>
+                                    @Html.ActionLink("Đặt xe", "DatXe", "Xe", new { maXe = prod.maXe, maNguoiDung = nguoiDung.maNguoiDung, hotenNguoiDatXe = "hoTenNguoiDungID", email = "EmailID", SDT = "SDTID", ghiChu = "ghiChuID", ngayThue = prod.ngayThue, ngayTra = prod.ngayTra, soNgayThue = prod.soNgayThue, diaChiNhanXe = "diaChiNhanXeID", maPhuongThucThanhToan = "maPhuongNhanThanhToanID", tongTien = prod.TongTien }, new { id = "DatXeID", @class = "btn btn-lg btn-primary", })
+
+                                </form>
                             </div>
 
                         </div>
@@ -135,10 +163,75 @@
 </div>
 
 <script src="~/Scripts/jquery-3.6.0.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
 <script>
-    $('#DatXeID').click(function () {
-        document.getElementById("myForm").submit();
 
+    var form = $("#form1");
+    form.validate({
+        rules: {
+            hoTenID: {
+                required: true
+            },
+            emailID: {
+                required: true,
+                email: true
+            },
+            SDTID: {
+                required: true,
+                minlength: 10,
+                maxlength:10
+            },
+            diaChiNhanXeID: {
+                required: true,
+            },
+        },
+        messages: {
+            hoTenID: "Vui lòng nhập họ tên",
+            emailID: {
+                required: "Vui lòng nhập email",
+                email: "Vui lòng nhập Email"
+            },
+
+            SDTID: {
+                required: "Vui lòng nhập số điện thoại",
+                minlength: "Số điện thoại yêu cầu 10 số",
+                maxlength: "Số điện thoại yêu cầu 10 số"
+            },
+            diaChiNhanXeID: {
+                required: "Vui lòng nhập địa chỉ"
+            },
+
+        }
+    });
+
+    $("#DatXeID").click(function (e) {
+        //Get attribute for post
+        if (!form.valid()) {
+            //$('#hoTenID-error').text("Mời nhập họ tên!");
+            //$('#hoTenID-error').addClass('text-danger');
+
+            //$('#emailID-error').text("Mời nhập email!");
+            //$('#emailID-error').addClass('text-danger');
+
+            //$('#SDTID-error').text("Mời nhập số điện thoại!");
+            //$('#SDTID-error').addClass('text-danger');
+
+            //$('#diaChiNhanXeID-error').text("Mời địa chỉ nhận xe!");
+            //$('#diaChiNhanXeID-error').addClass('text-danger');
+
+
+
+            //$.each(item_attribute_id, function (i, val) {
+            //    if (!$('#' + val + '').val()) {
+            //        $('#' + val + '-error').text($('#' + val + '-label').text() + " không được để trống!");
+            //        $('#' + val + '-error').addClass('text-danger');
+            //    }
+
+            //})
+            return false;
+        }
+
+        document.getElementById("myForm").submit();
 
         $('#DatXeID').attr('href', function () {
             return this.href.replace('hoTenNguoiDungID', $('#hoTenID').val());
@@ -158,6 +251,6 @@
         $('#DatXeID').attr('href', function () {
             return this.href.replace('maPhuongNhanThanhToanID', $('input[name=radioName]:checked', '#myForm').val());
         });
-    })
+    });
 
 </script>

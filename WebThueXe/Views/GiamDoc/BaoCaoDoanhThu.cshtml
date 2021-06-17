@@ -1,8 +1,8 @@
 ﻿@*@model IEnumerable<WebThueXe.Models.HopDong>*@
 @using WebThueXe.Models
+@using WebThueXe.Models
 @using PagedList.Mvc;
 @model PagedList.PagedList<HopDong>
-
 @{
     ViewBag.Title = "BaoCaoHopDong";
     Layout = "~/Views/Shared/_LayoutGiamDoc.cshtml";
@@ -11,7 +11,7 @@
 @{
     var month = (int)ViewData["month"];
     var year = (int)ViewData["year"];
-    var daThanhToan = (int)ViewData["daThanhToan"];
+
 }
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 <div class="container-fluid">
@@ -29,22 +29,10 @@
                 @Html.DropDownList("yearId", new SelectList(new string[] { }), new { @class = "form-control", @id = "yearId", name = "yearId" })
             </div>
         </div>
-        <div class="form-group flex-fill bd-highlight">
-            <label for="staticEmail" class="col-md-6 col-form-label">Trạng thái thanh toán:</label>
-            <div class="col-md-6">
-                @Html.DropDownList("daThanhToanId", new SelectList(new string[] { }), new { @class = "form-control", @id = "daThanhToanId", name = "daThanhToanId" })
-            </div>
-        </div>
     </div>
 
-    @*<div class="form-group row flex-fill bd-highlight">
-            <label for="staticEmail" class="col-md-3 col-form-label">Tên xe:</label>
-            <div class="col-md-6">
-                @Html.DropDownList("tenXeId", new SelectList(new string[] { }), new { @class = "form-control", @id = "tenXeId", name = "tenXeId" })
-            </div>
-        </div>*@
     <div class="form-group" style="text-align:right; margin-right:100px">
-        @Html.ActionLink("Xem", "BaoCaoHopDong", "GiamDoc", new { month = "monthId", year = "yearId", daThanhToan = "daThanhToanId" }, new { id = "XemId", @class = "btn btn-primary text-center" })
+        @Html.ActionLink("Xem", "BaoCaoDoanhThu", "GiamDoc", new { month = "monthId", year = "yearId" }, new { id = "XemId", @class = "btn btn-primary text-center" })
     </div>
     <h2>BÁO CÁO HỢP ĐỒNG THUÊ XE</h2>
     <table class="table table-striped">
@@ -59,10 +47,10 @@
                 Tên xe
             </th>
             <th>
-                Trạng thái thanh toán
+                Ngày nhận và trả xe
             </th>
             <th>
-                Ngày nhận và trả xe
+                Tổng thành tiền
             </th>
         </tr>
 
@@ -81,30 +69,27 @@
                     @Html.DisplayFor(model => item.tenXe)
                 </td>
                 <td>
-                    @if (item.daThanhToan)
-                    {
-                        <p style="font-weight:bold;color:blue">Đã Thanh Toán</p>
-                    }
-                    else
-                    {
-                        <p style="font-weight:bold;color:red">Chưa Thanh Toán</p>
-
-                    }
-                </td>
-                <td>
                     <p>Ngày nhận: @Html.DisplayFor(model => item.ngayThue)</p>
                     <p>Ngày trả: @Html.DisplayFor(model => item.ngayTra)</p>
                 </td>
+                <td>
+                    <p style="font-weight:bold;color:red;">Tổng tiền: @Html.DisplayFor(model => item.TongTien)</p>
+                </td>
             </tr>
         }
+        <tr>
+            <td colspan="4" style="text-align:right">Tổng doanh thu</td>
+            <td style="color:red;font-weight:bold">@ViewBag.TongDoanhThu</td>
+        </tr>
     </table>
 </div>
 Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 <div class="MenuPage">
-    @Html.PagedListPager(Model, page => Url.Action("BaoCaoHopDong", new { page = page }))
+    @Html.PagedListPager(Model, page => Url.Action("BaoCaoDoanhThu", new { page = page }))
 </div>
 <script src="~/Scripts/jquery-3.6.0.js"></script>
 <script>
+
 
     var html, html1, html2;
     for (var k = 1; k <= 12; k++) {
@@ -112,6 +97,7 @@ Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCo
     }
     $('#monthId').html(html);
     $('#monthId').val(@month);
+
 
     var d = new Date();
     var n = d.getFullYear();
@@ -121,49 +107,19 @@ Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCo
     $('#yearId').html(html1);
     $('#yearId').val(@year);
 
-    html2 += '<option value="' + 0 + '"> Đã thanh toán </option>"'
-    html2 += '<option value="' + 1 + '"> Chưa thanh toán </option>"'
-    html2 += '<option value="' + 2 + '"> Cả 2 </option>"'
-
-    $('#daThanhToanId').html(html2);
-    $('#daThanhToanId').val(@daThanhToan);
-
     $('#XemId').click(function () {
+        var daThanhToan;
+        if ($('#daThanhToanId').val() == 0) {
+            daThanhToan = true;
+        } else {
+            daThanhToan = false;
+        }
         $('#XemId').attr('href', function () {
             return this.href.replace('monthId', $('#monthId').val());
         });
         $('#XemId').attr('href', function () {
             return this.href.replace('yearId', $('#yearId').val());
         });
-        $('#XemId').attr('href', function () {
-            if ($('#daThanhToanId').val() == 0) {
-                return this.href.replace('daThanhToanId', 0);
-            } else if ($('#daThanhToanId').val() == 1) {
-                return this.href.replace('daThanhToanId', 1);
-            } else {
-                return this.href.replace('daThanhToanId', 2);
-            }
-        });
-        //$.ajax({
-        //    url: "/GiamDoc/LoadTenXe",
-        //    type: "POST",
-        //    dataType: "json",
-        //    data: {
-        //        month: $('#monthId').val(),
-        //        year: $('#yearId').val(),
-        //        daThanhToan: daThanhToan,
-        //    },
-        //    success: function (response) {
-        //        if (response.status == true) {
-        //            var html = '<option value="">--Chọn quyền--</option>"';
-        //            var data = response.data;
-        //            $.each(data, function (i, val) {
-        //                html += '<option value="' + val.maXe + '">' + val.tenXe + '</option>"'
-        //            });
-        //            $('#tenXeId').html(html);
-        //        }
-        //    }
-        //});
     })
 
 </script>

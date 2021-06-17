@@ -330,6 +330,16 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="Views\KeToan\ChiTietHopDong.cshtml" />
     <Content Include="Views\GiamDoc\BaoCaoHopDong.cshtml" />
+    <Content Include="Views\KeToan\DanhSachHopDong.cshtml" />
+    <Content Include="Views\GiamDoc\BaoCaoDoanhThu.cshtml" />
+    <Content Include="Views\GiamDoc\BaoCaoXe.cshtml" />
+    <Content Include="Views\KeToan\QuanLyNguoiDung.cshtml" />
+    <Content Include="Views\KeToan\ChiTietThongTinNguoiDung.cshtml" />
+    <Content Include="Views\KeToan\XoaNguoiDung.cshtml" />
+    <Content Include="Views\KeToan\ChiTietHoaDon.cshtml" />
+    <Content Include="Views\KeToan\DanhSachYeuCauHuyHopDong.cshtml" />
+    <Content Include="Views\User\DanhSachHopDong.cshtml" />
+    <Content Include="Views\TrangChu\LienHe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

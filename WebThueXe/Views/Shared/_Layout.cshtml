@@ -38,16 +38,7 @@
                             <a class="nav-link" href="@Url.Action("Index","Xe")">Bảng giá</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Thuê xe dịch vụ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Album ảnh</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Liên hệ</a>
+                            <a class="nav-link" href="@Url.Action("LienHe","TrangChu")">Liên hệ</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
@@ -62,6 +53,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdown">
                                     <a class="dropdown-item" href="@Url.Action("XemThongTinCaNhan","User",new {id= Session["id"]})">Xem thông tin cá nhân</a>
                                     <a class="dropdown-item" href="@Url.Action("DanhSachDatXe","User")">Lịch sử đặt xe</a>
+                                    <a class="dropdown-item" href="@Url.Action("DanhSachHopDong","User")">Danh sách hợp đồng</a>
 
                                     @switch (Session["maQuyen"])
                                     {

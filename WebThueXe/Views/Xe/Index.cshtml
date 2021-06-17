@@ -6,7 +6,7 @@
     ViewBag.Title = "Tất cả loại xe";
     Layout = "~/Views/Shared/_LayoutTimKiem.cshtml";
 }
-
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @foreach (var item in Model)
 {
@@ -51,7 +51,7 @@
 
 }
 
-Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-<div class="MenuPage">
+<div class="page" style="display: inline;">
+    Page: @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
 </div>

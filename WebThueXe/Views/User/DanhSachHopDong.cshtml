@@ -18,7 +18,7 @@
                 Trạng thái thanh toán
             </th>
             <th>
-                Trạng thái đơn đặt xe
+                Trạng thái hợp đồng
             </th>
             <th>
                 Thông tin hợp đồng
@@ -49,13 +49,13 @@
                     }
                 </td>
                 <td>
-                    @if (item.daDuyet)
+                    @if (item.maTinhTrangHopDong==1)
                     {
-                        <p style="font-weight:bold;color:blue">Đã duyệt</p>
+                        <p style="font-weight:bold;color:blue">Đã được ký kết</p>
                     }
-                    else
+                    else if(item.maTinhTrangHopDong==2)
                     {
-                        <p style="font-weight:bold;color:red">Chưa duyệt</p>
+                        <p style="font-weight:bold;color:red">Chưa được ký kết</p>
 
                     }
                 </td>
@@ -67,7 +67,7 @@
                 </td>
                 <td>
                     <a href="" data-toggle="modal" class="modal-Print" data-id="@item.maHopDong">Xem hợp đồng</a><br />
-                    <a href="" data-toggle="modal" class="modal-Huy" data-id="@item.maHopDong">Hủy đơn</a><br />
+                    <a href="" data-toggle="modal" class="modal-Huy" data-id="@item.maHopDong">Hủy hợp đồng</a><br />
                 </td>
             </tr>
         }

@@ -18,12 +18,12 @@
             @if (@Model.maPhuongThucThanhToan == 1)
             {
                 <h3 style="text-align:center">@Model.tenPhuongThucThanhToan</h3>
-                <p style="text-align:center">Bạn sẽ đến văn phòng của chúng tôi để thanh toán <a href="#" style="text-decoration:none; color:black;font-weight:bold">click để xem địa chỉ</a></p>
+                <p style="text-align:center">Bạn sẽ đến văn phòng của chúng tôi để thanh toán <a href="@Url.Action("LienHe","TrangChu")" style="text-decoration:none; color:black;font-weight:bold">click để xem địa chỉ</a></p>
             }
             else if (@Model.maPhuongThucThanhToan == 2)
             {
                 <h3 style="text-align:center">@Model.tenPhuongThucThanhToan</h3>
-                <p style="text-align:center">Bạn sẽ đến bãi xe của chúng tôi để thanh toán khi nhận xe <a style="text-decoration:none; color:black;font-weight:bold">click để xem địa chỉ</a></p>
+                <p style="text-align:center">Bạn sẽ đến bãi xe của chúng tôi để thanh toán khi nhận xe <a href="@Url.Action("LienHe","TrangChu")" style="text-decoration:none; color:black;font-weight:bold">click để xem địa chỉ</a></p>
 
             }
             else

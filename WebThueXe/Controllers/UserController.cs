@@ -16,12 +16,13 @@ namespace WebThueXe.Controllers
             return currentUser;
         }
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl)
         {
+            ViewData["returnUrl"] = returnUrl;
             return View();
         }
         [HttpPost]
-        public ActionResult Login(NguoiDung _user)
+        public ActionResult Login(NguoiDung _user,string returnUrl)
         {
             var check = database.NguoiDungs.Where(s => s.username == _user.username && s.password == _user.password).FirstOrDefault();
             if (check == null)
@@ -37,16 +38,23 @@ namespace WebThueXe.Controllers
                 Session["maQuyen"] = check.maQuyen;
                 Session["id"] = check.maNguoiDung;
                 ViewBag.ten = check.ten;
-                switch (check.maQuyen)
+                if (returnUrl != null)
                 {
-                    case 1:
-                        return RedirectToAction("Index", "Admin");
-                    case 3:
-                        return RedirectToAction("Index", "GiamDoc");
-                    case 4:
-                        return RedirectToAction("Index", "KeToan");
-                    default:
-                        return RedirectToAction("Index", "TrangChu");
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    switch (check.maQuyen)
+                    {
+                        case 1:
+                            return RedirectToAction("Index", "Admin");
+                        case 3:
+                            return RedirectToAction("Index", "GiamDoc");
+                        case 4:
+                            return RedirectToAction("Index", "KeToan");
+                        default:
+                            return RedirectToAction("Index", "TrangChu");
+                    }
                 }
             }
         }
@@ -55,7 +63,20 @@ namespace WebThueXe.Controllers
             NguoiDung nguoiDung = (NguoiDung)Session["NguoiDung"];
             if (Session["NguoiDung"] != null)
             {
-                return View(database.HopDongs.Where(s => s.maNguoiDung == nguoiDung.maNguoiDung).ToList());
+                return View(database.HopDongs.Where(s => s.maNguoiDung == nguoiDung.maNguoiDung&& s.daDuyet == false&&s.yeuCauHuyDon==false).OrderByDescending(s=>s.ngayLapHopDong).ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+
+            }
+        }
+        public ActionResult DanhSachHopDong()
+        {
+            NguoiDung nguoiDung = (NguoiDung)Session["NguoiDung"];
+            if (Session["NguoiDung"] != null)
+            {
+                return View(database.HopDongs.Where(s => s.maNguoiDung == nguoiDung.maNguoiDung&& s.daDuyet == true&&s.yeuCauHuyDon==false).OrderByDescending(s => s.ngayLapHopDong).ToList());
             }
             else
             {

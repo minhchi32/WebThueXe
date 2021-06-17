@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebThueXe.Models.HopDong>
+
+<style>
+    table.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+@foreach (var item in Model)
+{
+<div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <h5 class="mb-3">Khách hàng:</h5>
+                    <div>Họ tên: <span style="font-weight:bold">@item.hotenNguoiDatXe</span></div>
+                    <div>Số điện thoại: <span style="font-weight:bold">@item.SDT</span></div>
+                    <div>Email: <span style="font-weight:bold">@item.email</span></div>
+                </div>
+                <div class="col-sm-6 ">
+                    <h5 class="mb-3">Thông tin hóa đơn</h5>
+                    <div>Ngày: <span style="font-weight:bold">@ViewBag.ToDay</span></div>
+                    <div>Hợp đồng số: <span style="font-weight:bold">@item.maHopDong</span></div>
+                    <div>Phương thức thanh toán: <span style="font-weight:bold">@item.tenLoaiThanhToan</span></div>
+                </div>
+            </div>
+            <div class="table-responsive-sm">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="center">#</th>
+                            <th>Tên xe</th>
+                            <th>Biển xe</th>
+                            <th class="right">Loại xe</th>
+                            <th class="center">Hiệu xe</th>
+                            <th class="right">Giá thuê</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="center">@item.Xe.maXe</td>
+                            <td class="left strong">@item.Xe.tenXe</td>
+                            <td class="left">@item.Xe.bienSo</td>
+                            <td class="right">@item.Xe.LoaiXe.tenLoaiXe</td>
+                            <td class="center">@item.Xe.HieuXe.tenHieuXe</td>
+                            <td class="right">@item.Xe.giaThueXe</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                </div>
+                <div class="col-lg-4 col-sm-5 ml-auto">
+                    <table class="table table-clear">
+                        <tbody>
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Tổng Thanh Toán:</strong>
+                                </td>
+                                <td class="right">
+                                    <strong class="text-dark">@item.TongTien</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+}
+

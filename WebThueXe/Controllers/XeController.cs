@@ -55,7 +55,7 @@ namespace WebThueXe.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
-        public ActionResult HopDongThueXe(int maXe, string tenXe, DateTime ngayThue, DateTime ngayTra, int soNgayThue, int tongTien, int donGia)
+        public ActionResult HopDongThueXe(int maXe, string tenXe, DateTime ngayThue, DateTime ngayTra, int soNgayThue, int tongTien, int donGia,string returnUrl)
         {
             int count = database.HopDongs.Count();
             if (Session["NguoiDung"] != null)
@@ -78,8 +78,7 @@ namespace WebThueXe.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "User");
-
+                return RedirectToAction("Index", "User",new {returnUrl=returnUrl });
             }
         }
         public ActionResult DatXe(int maXe, int maNguoiDung, string hotenNguoiDatXe, string email, int SDT, string ghiChu, DateTime ngayThue, DateTime ngayTra, int soNgayThue, string diaChiNhanXe, int maPhuongThucThanhToan, int tongTien)
