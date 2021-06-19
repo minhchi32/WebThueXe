@@ -12,7 +12,7 @@
                 "Cám ơn bạn đã đặt xe tại trang web của chúng tôi, xe đã đặt tuy nhiên hệ thống mới đưa đơn đặt xe của bạn vào trạng thái chờ duyệt cho đến khi bạn thực hiện đầy đủ nghĩa vụ thanh toán trong vòng 24h. Chúng tôi sẽ liên hệ với bạn thông qua thông tin mà bạn đã cung cấp cho chúng tôi trong thời gian tối đa 24h kể từ khi nhận được đơn đặt xe của bạn
             </blockquote>
             <div class="col text-center">
-                <button class="btn btn-primary">In hợp đồng</button>
+                <a href="" data-toggle="modal" class="btn btn-primary modal-Print" data-id="@ViewBag.hopdongid">Xem hợp đồng</a><br />
             </div>
 
             @if (@Model.maPhuongThucThanhToan == 1)
@@ -39,3 +39,51 @@
     </div>
 </div>
 
+<div class="modal fade" id="Print-DatXe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-url="@Url.Action("ChiTietHopDong","KeToan")">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body2">
+                <input type="hidden" id="hidPrintId" value="0" />
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">In Hợp Đồng</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.6.0.js"></script>
+<script>
+    var print_count = 0;
+    
+    $('.modal-Print').click(function () {
+        $('#hidPrintId').val($(this).data('id'));
+        var id = $('#hidPrintId').val();
+        console.log(id);
+        if (print_count == 0) {
+            var tmp = $('#Print-DatXe').data('url');
+            $('#Print-DatXe').data('url', tmp + "/" + id);
+            var url = $('#Print-DatXe').data('url');
+            console.log(url);
+        }
+        else {
+            var tmp = $('#Print-DatXe').data('url');
+            $('#Print-DatXe').data('url', tmp);
+            var url = $('#Print-DatXe').data('url');
+            console.log(url);
+        }
+        print_count++;
+        $.get(url, function (data) {
+            $mymodal = $("#Print-DatXe");
+            //update the modal's body with the response received
+            $mymodal.find("div.modal-body").html(data);
+            // Show the modal
+            $mymodal.modal("show");
+        })
+    })
+    
+
+</script>

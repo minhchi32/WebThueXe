@@ -107,6 +107,7 @@ namespace WebThueXe.Controllers
             var xe = database.Xes.Find(maXe);
             xe.maTinhTrangXe = 2;
             database.SaveChanges();
+            ViewBag.hopdongid = hopDong.maHopDong;
             return View(database.PhuongThucThanhToans.Where(s => s.maPhuongThucThanhToan == maPhuongThucThanhToan).FirstOrDefault());
         }
         public ActionResult Search()

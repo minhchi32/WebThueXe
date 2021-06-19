@@ -408,6 +408,10 @@ namespace WebThueXe.Controllers
         {
             return View(database.HopDongs.Where(s => s.daDuyet == true).OrderByDescending(s => s.ngayLapHopDong).ToList());
         }
+        public ActionResult DanhSachYeuCauHuyDonDatXe()
+        {
+            return View(database.HopDongs.Where(s => s.daDuyet == false && s.yeuCauHuyDon == true).OrderByDescending(s => s.ngayLapHopDong).ToList());
+        }
         public ActionResult DanhSachYeuCauHuyHopDong()
         {
             return View(database.HopDongs.Where(s => s.daDuyet == true&&s.yeuCauHuyDon==true).OrderByDescending(s => s.ngayLapHopDong).ToList());
