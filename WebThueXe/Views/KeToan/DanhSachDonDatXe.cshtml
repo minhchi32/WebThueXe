@@ -6,6 +6,31 @@
     Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
 }
 
+<style>
+    @@media screen {
+  #printSection {
+      display: none;
+  }
+}
+
+@@media print {
+  body * {
+    visibility:hidden;
+  }
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+    position:absolute;
+    left:0;
+    top:0;
+  }
+}
+
+
+
+</style>
+
 <h2>DanhSachDonDatXe</h2>
 
 <table class="table table-striped">
@@ -155,6 +180,8 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
+            </div>
+            <div class="modal-body2">
                 <input type="hidden" id="hidPrintId" value="0" />
             </div>
             <div class="modal-footer">
@@ -167,6 +194,8 @@
 
 <script src="~/Scripts/jquery-3.6.0.js"></script>
 <script>
+    var print_count = 0;
+    var bill_count = 0;
     $('.modal-Del').click(function () {
         $('#del-DatXe').modal('show');
         $('#hidDelId').val($(this).data('id'));
@@ -185,7 +214,7 @@
                 }
             })
         })
-        
+
     })
     $('.modal-Duyet').click(function () {
         $('#Duyet-DatXe').modal('show');
@@ -230,13 +259,46 @@
         $('#hidPrintId').val($(this).data('id'));
         var id = $('#hidPrintId').val();
         console.log(id);
-        var tmp = $('#Print-DatXe').data('url');
-        $('#Print-DatXe').data('url', tmp + "/" + id);
-        var url = $('#Print-DatXe').data('url');
-        console.log(url);
-
+        if (print_count == 0) {
+            var tmp = $('#Print-DatXe').data('url');
+            $('#Print-DatXe').data('url', tmp + "/" + id);
+            var url = $('#Print-DatXe').data('url');
+            console.log(url);
+        }
+        else {
+            var tmp = $('#Print-DatXe').data('url');
+            $('#Print-DatXe').data('url', tmp);
+            var url = $('#Print-DatXe').data('url');
+            console.log(url);
+        }
+        print_count++;
         $.get(url, function (data) {
             $mymodal = $("#Print-DatXe");
+            //update the modal's body with the response received
+            $mymodal.find("div.modal-body").html(data);
+            // Show the modal
+            $mymodal.modal("show");
+        })
+    })
+    $('.modal-Bill').click(function () {
+        $('#hidBillId').val($(this).data('id'));
+        var id = $('#hidBillId').val();
+        console.log(id);
+        if (bill_count == 0) {
+            var tmp = $('#Bill-DatXe').data('url');
+            $('#Bill-DatXe').data('url', tmp + "/" + id);
+            var url = $('#Bill-DatXe').data('url');
+            console.log(url);
+        }
+        else {
+            var tmp = $('#Bill-DatXe').data('url');
+            $('#Bill-DatXe').data('url', tmp);
+            var url = $('#Bill-DatXe').data('url');
+            console.log(url);
+        }
+        bill_count++;
+        $.get(url, function (data) {
+            $mymodal = $("#Bill-DatXe");
             //update the modal's body with the response received
             $mymodal.find("div.modal-body").html(data);
             // Show the modal

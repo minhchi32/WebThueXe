@@ -340,6 +340,7 @@
     <Content Include="Views\KeToan\DanhSachYeuCauHuyHopDong.cshtml" />
     <Content Include="Views\User\DanhSachHopDong.cshtml" />
     <Content Include="Views\TrangChu\LienHe.cshtml" />
+    <Content Include="Views\KeToan\DanhSachYeuCauHuyDonDatXe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -6,6 +6,30 @@
     Layout = "~/Views/Shared/_LayoutKeToan.cshtml";
 }
 
+<style>
+    @@media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @@media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #printSection, #printSection * {
+            visibility: visible;
+        }
+
+        #printSection {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+</style>
+
 <h2>DanhSachDonDatXe</h2>
 
 <table class="table table-striped">
@@ -51,11 +75,11 @@
                 }
             </td>
             <td>
-                @if (item.maTinhTrangHopDong==1)
+                @if (item.maTinhTrangHopDong == 1)
                 {
                     <p style="font-weight:bold;color:blue">Đã ký kết</p>
                 }
-                else if(item.maTinhTrangHopDong==2)
+                else if (item.maTinhTrangHopDong == 2)
                 {
                     <p style="font-weight:bold;color:red">Chưa ký kết</p>
 
@@ -152,36 +176,42 @@
     </div>
 </div>
 
-<div class="modal fade" id="Print-DatXe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-url="@Url.Action("ChiTietHopDong","KeToan")">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <input type="hidden" id="hidPrintId" value="0" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">In Hợp Đồng</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+    <div class="modal fade" id="Print-DatXe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-url="@Url.Action("ChiTietHopDong","KeToan")">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body2">
+                    <input type="hidden" id="hidPrintId" value="0" />
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">In Hợp Đồng</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="Bill-DatXe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-url="@Url.Action("ChiTietHoaDon","KeToan")">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <input type="hidden" id="hidBillId" value="0" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">In Hóa Đơn</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+    <div class="modal fade" id="Bill-DatXe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-url="@Url.Action("ChiTietHoaDon","KeToan")">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                </div>
+                <div class="modal-body2">
+                    <input type="hidden" id="hidBillId" value="0" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">In Hóa Đơn</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <script src="~/Scripts/jquery-3.6.0.js"></script>
 <script>
+    var print_count = 0;
+    var bill_count = 0;
     $('.modal-Del').click(function () {
         $('#del-DatXe').modal('show');
         $('#hidDelId').val($(this).data('id'));
@@ -245,11 +275,19 @@
         $('#hidPrintId').val($(this).data('id'));
         var id = $('#hidPrintId').val();
         console.log(id);
-        var tmp = $('#Print-DatXe').data('url');
-        $('#Print-DatXe').data('url', tmp + "/" + id);
-        var url = $('#Print-DatXe').data('url');
-        console.log(url);
-
+        if (print_count == 0) {
+            var tmp = $('#Print-DatXe').data('url');
+            $('#Print-DatXe').data('url', tmp + "/" + id);
+            var url = $('#Print-DatXe').data('url');
+            console.log(url);
+        }
+        else {
+            var tmp = $('#Print-DatXe').data('url');
+            $('#Print-DatXe').data('url', tmp);
+            var url = $('#Print-DatXe').data('url');
+            console.log(url);
+        }
+        print_count++;
         $.get(url, function (data) {
             $mymodal = $("#Print-DatXe");
             //update the modal's body with the response received
@@ -262,11 +300,19 @@
         $('#hidBillId').val($(this).data('id'));
         var id = $('#hidBillId').val();
         console.log(id);
-        var tmp = $('#Bill-DatXe').data('url');
-        $('#Bill-DatXe').data('url', tmp + "/" + id);
-        var url = $('#Bill-DatXe').data('url');
-        console.log(url);
-
+        if (bill_count == 0) {
+            var tmp = $('#Bill-DatXe').data('url');
+            $('#Bill-DatXe').data('url', tmp + "/" + id);
+            var url = $('#Bill-DatXe').data('url');
+            console.log(url);
+        }
+        else {
+            var tmp = $('#Bill-DatXe').data('url');
+            $('#Bill-DatXe').data('url', tmp);
+            var url = $('#Bill-DatXe').data('url');
+            console.log(url);
+        }
+        bill_count++;
         $.get(url, function (data) {
             $mymodal = $("#Bill-DatXe");
             //update the modal's body with the response received
@@ -275,4 +321,5 @@
             $mymodal.modal("show");
         })
     })
+
 </script>

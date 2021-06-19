@@ -80,6 +80,8 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
+            </div>
+            <div class="modal-body2">
                 <input type="hidden" id="hidPrintId" value="0" />
             </div>
             <div class="modal-footer">
@@ -113,15 +115,24 @@
 
 <script src="~/Scripts/jquery-3.6.0.js"></script>
 <script>
+    var print_count = 0;
     $('.modal-Print').click(function () {
         $('#hidPrintId').val($(this).data('id'));
         var id = $('#hidPrintId').val();
         console.log(id);
-        var tmp = $('#Print-DatXe').data('url');
-        $('#Print-DatXe').data('url', tmp + "/" + id);
-        var url = $('#Print-DatXe').data('url');
-        console.log(url);
-
+        if (print_count == 0) {
+            var tmp = $('#Print-DatXe').data('url');
+            $('#Print-DatXe').data('url', tmp + "/" + id);
+            var url = $('#Print-DatXe').data('url');
+            console.log(url);
+        }
+        else {
+            var tmp = $('#Print-DatXe').data('url');
+            $('#Print-DatXe').data('url', tmp);
+            var url = $('#Print-DatXe').data('url');
+            console.log(url);
+        }
+        print_count++;
         $.get(url, function (data) {
             $mymodal = $("#Print-DatXe");
             //update the modal's body with the response received
