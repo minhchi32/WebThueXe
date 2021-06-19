@@ -138,6 +138,8 @@ namespace WebThueXe.Controllers
         }
         public ActionResult XemThongTinCaNhan(int id)
         {
+            var dsNganHang = database.NganHangs.ToList();
+            ViewBag.DsNganHang = new SelectList(dsNganHang, "maNganHang", "tenNganHang");
             return View(database.NguoiDungs.Where(s => s.maNguoiDung == id).FirstOrDefault());
         }
     }

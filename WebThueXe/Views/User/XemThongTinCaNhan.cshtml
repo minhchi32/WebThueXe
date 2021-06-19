@@ -5,51 +5,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>XemThongTinCaNhan</h2>
 
 <div>
-    <h4>NguoiDung</h4>
     <hr />
     <section class="container-fluid" style="height:100%">
         <section class="row justify-content-center">
             <section class="col-12 col-sm-8 col-md-4 form-container">
                 <h2>Thông tin cá nhân</h2>
-                <form>
-                    <div class="form-group">
-                        <label>@Html.LabelFor(model => model.ten)</label>
-                        @Html.TextBoxFor(model => model.ten, new { style = "field-validation-error" })
-                    </div>
-                    <div class="form-group">
-                        <label>@Html.LabelFor(model => model.SDT)</label>
-                        @Html.TextBoxFor(model => model.SDT, new { style = "field-validation-error" })
-                    </div>
-                    <div class="form-group">
-                        <label>@Html.LabelFor(model => model.diaChi)</label>
-                        @Html.TextBoxFor(model => model.diaChi)
-                    </div>
-                    <div class="form-group">
-                        <label>@Html.LabelFor(model => model.hoKhau)</label>
-                        @Html.TextBoxFor(model => model.hoKhau)
-                    </div>
-                    <div class="form-group">
-                        <label>@Html.LabelFor(model => model.soTKNganHang)</label>
-                        @Html.TextBoxFor(model => model.soTKNganHang)
-                    </div>
-                    <div class="form-group">
-                        <label>@Html.LabelFor(model => model.NganHang.tenNganHang)</label>
-                        @Html.TextBoxFor(model => model.NganHang.tenNganHang)
-                    </div>
-                    <div class="form-group">
-                        <label>@Html.LabelFor(model => model.CMND)</label>
-                        @Html.TextBoxFor(model => model.CMND)
-                    </div>
-                    <div class="form-group form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Cập nhật</button>
-                </form>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.ten)</th>
+                            <td>@Html.EditorFor(model => model.ten, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            @Html.ValidationMessageFor(model => model.ten, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.SDT)</th>
+                            <td>@Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.diaChi)</th>
+                            <td>@Html.EditorFor(model => model.diaChi, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            @Html.ValidationMessageFor(model => model.diaChi, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.hoKhau)</th>
+                            <td>@Html.EditorFor(model => model.hoKhau, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            @Html.ValidationMessageFor(model => model.hoKhau, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.soTKNganHang)</th>
+                            <td>@Html.EditorFor(model => model.soTKNganHang, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            @Html.ValidationMessageFor(model => model.soTKNganHang, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NganHang.tenNganHang)</th>
+                            <td>@Html.DropDownListFor(model => model.maNganHang, ViewBag.DsNganHang as SelectList, new { @class = "form-control" })</td>
+                            @Html.ValidationMessageFor(model => model.maNganHang, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.CMND)</th>
+                            <td>@Html.EditorFor(model => model.CMND, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            @Html.ValidationMessageFor(model => model.CMND, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.username)</th>
+                            <td>@Html.DisplayFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.password)</th>
+                            <td>@Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.ConfirmPass)</th>
+                            <td>@Html.EditorFor(model => model.ConfirmPass, new { htmlAttributes = new { @class = "form-control" } })</td>
+                            @Html.ValidationMessageFor(model => model.ConfirmPass, "", new { @class = "text-danger" })
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="form-group">
+                                    <input type="submit" value="Save" class="btn btn-primary" disabled/>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
         </section>
     </section>

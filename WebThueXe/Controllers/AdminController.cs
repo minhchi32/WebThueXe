@@ -26,10 +26,27 @@ namespace WebThueXe.Controllers
             int pageSize = 20;
             int pageNum = (page ?? 1);
             var result = database.NguoiDungs.ToList();
+            
+            
+
             if (ten != null)
+            {
+                ViewBag.ten = ten;
                 result = result.Where(s => s.ten.Contains(ten)).ToList();
+            }
+            else
+            {
+                ViewBag.ten = "";
+            }
+            if (maQuyen==0)
+            {
+                ViewBag.maquyen = "";
+            }
+            else ViewBag.maquyen = maQuyen;
             if (maQuyen != 0)
+            {
                 result = result.Where(s => s.maQuyen == maQuyen).ToList();
+            }
             return View(result.ToPagedList(pageNum, pageSize));
         }
 
@@ -76,14 +93,33 @@ namespace WebThueXe.Controllers
                 var dsQuyen = database.Quyens.ToList();
                 ViewBag.DsNganHang = new SelectList(dsNganHang, "maNganHang", "tenNganHang");
                 ViewBag.DsQuyen = new SelectList(dsQuyen, "maQuyen", "tenQuyen");
+                nguoiDung.ConfirmPass = nguoiDung.password;
                 database.Entry(nguoiDung).State = System.Data.Entity.EntityState.Modified;
                 database.SaveChanges();
                 return RedirectToAction("QuanLyNguoiDung", "Admin");
             }
-            catch (Exception e)
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {
-                return Content(e.ToString());
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                return Content(raise.ToString());
+                //throw raise;
             }
+            //catch (Exception e)
+            //{
+            //    return Content(e.ToString());
+            //}
         }
         public ActionResult ChiTietThongTinNguoiDung(int id)
         {
