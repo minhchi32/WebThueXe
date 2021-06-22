@@ -61,7 +61,7 @@ namespace WebThueXe.Controllers
                     string extent = Path.GetExtension(xe.UploadImage.FileName);
                     filename = filename + extent;
                     xe.hinh = "/Content/images/" + filename;
-                    xe.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Content/images/"), filename));
+                    xe.UploadImage.SaveAs(Path.Combine(Server.MapPath("/Content/images/"), filename));
                 }
                 database.Xes.Add(xe);
                 database.SaveChanges();

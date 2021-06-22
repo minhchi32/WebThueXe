@@ -65,6 +65,8 @@ namespace WebThueXe.Controllers
             {
                 var dsNganHang = database.NganHangs.ToList();
                 var dsQuyen = database.Quyens.ToList();
+                nguoiDung.ConfirmPass = nguoiDung.password;
+                nguoiDung.ngayThamGia = DateTime.Now;
                 ViewBag.DsNganHang = new SelectList(dsNganHang, "maNganHang", "tenNganHang");
                 ViewBag.DsQuyen = new SelectList(dsQuyen, "maQuyen", "tenQuyen");
                 database.NguoiDungs.Add(nguoiDung);
